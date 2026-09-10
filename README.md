@@ -13,6 +13,7 @@ I have implemented the main abstract class `LibraryItems.java`. This class acts 
 * Java
 * IntelliJ IDEA
 * Git bash & GitHub
+* Docs
 
 ## Author
 * Puja Paul - Task 1 (LibraryItems Abstract Class)
