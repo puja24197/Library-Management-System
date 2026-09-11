@@ -1,45 +1,87 @@
 public abstract class LibraryItems {
-        private String id;
-        private String title;
-        private boolean isIssued;
-        private String studentId;
-        private int totalCopies;
-        private int availableCopies;
+    private String title;
+    private boolean isIssued ;
+    private String studentId;
+    private String studentEmail ;
+    private int totalCopies ;
+    private int availableCopies;
 
-        public LibraryItems(String id, String title, int totalCopies) {
-            this.id = id;
-            this.title = title;
-            this.totalCopies = totalCopies;
-            this.availableCopies = totalCopies;
-            this.isIssued = false;
-            this.studentId = "N/A";
+      private int dueDate ;
+       private double finePerDay = 20.0;
+
+    public LibraryItems(String title, int totalCopies) {
+        this.title = title;
+        this.totalCopies = totalCopies;
+        this.availableCopies = totalCopies;
+        this.isIssued = false;
+        this.studentId = "N/A";
+        this.studentEmail = "N/A";
+        this.dueDate = 0;
+    }
+    public abstract String getDetails();
+
+    public boolean issueToStudent(String studentId, String studentEmail,int currentDate) {
+        if (availableCopies > 0) {
+            availableCopies--;
+            this.isIssued = true;
+            this.studentId = studentId;
+            this.studentEmail = studentEmail;
+            this.dueDate = currentDate + 15;
+            return true;
         }
-        public abstract String getDetails();
+        return false;
+    }
 
-          public boolean issueToStudent(String studentId) {
-            if (availableCopies > 0) {
-                availableCopies--;
-                this.isIssued = true;
-                this.studentId = studentId;
-                return true;
-            }
-            return false;
+    public double returnFromStudent( int ReturnDate) {
+        double fine = 0.0;
+        if (isIssued && ReturnDate > dueDate) {
+            int Late = ReturnDate - dueDate;
+             fine =Late * finePerDay;
         }
 
-        public void returnFromStudent() {
-            if (availableCopies < totalCopies) {
-                availableCopies++;
-            }
+        if (isIssued) {
+            availableCopies++;
             if (availableCopies == totalCopies) {
                 this.isIssued = false;
                 this.studentId = "N/A";
+                this.studentEmail = "N/A";
+                this.dueDate = 0 ;
             }
         }
-        public String getId() { return id; }
-        public String getTitle() { return title; }
-        public boolean isIssued() { return isIssued; }
-        public String getStudentId() { return studentId; }
-        public int getTotalCopies() { return totalCopies; }
-        public int getAvailableCopies() { return availableCopies; }
+        return fine;
     }
+    public void browseWikipedia(String studentEmail, String topic) {
+        if (studentEmail.contains("@")) {
+            if (topic == "") {
+                 topic = title;
+            }
+              String formattedTopic = topic.replace(" ", "_");
+            System.out.println("Email: " + studentEmail);
+            System.out.println("Link: https://en.wikipedia.org/wiki/" + formattedTopic);
+        } else {
+            System.out.println("Wrong Email!");
+        }
+    }
+
+    public String getTitle() {
+        return title;
+    }
+    public boolean isIssued() {
+        return isIssued ;
+    }
+    public String getStudentId() {
+        return studentId;
+    }
+    public String getStudentEmail() {
+        return studentEmail;
+    }
+    public int getTotalCopies() {
+        return totalCopies;
+    }
+    public int getAvailableCopies(){
+        return availableCopies;
+    }
+    public int getDueDate() {
+        return dueDate; }
+}
 
