@@ -17,3 +17,15 @@ I have implemented the main abstract class `LibraryItems.java`. This class acts 
 
 ## Author
 * Puja Paul - Task 1 (LibraryItems Abstract Class)
+
+
+
+## Task 2: Book Class Implementation
+
+The `Book.java` class was implemented by me by extending the `LibraryItems` class.
+
+### OOP Concepts Applied:
+* Inheritance: The `LibraryItems` class was extended so that its common properties and methods could be used in the `Book` class.
+* Polymorphism: The `getDetails()` method was overridden to display book-specific information.
+* Encapsulation: The `author` field was kept private, and getter and setter methods were used to access it.
+* Constructor: The book title and total number of copies were initialized using the parent class constructor.
