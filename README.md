@@ -29,3 +29,8 @@ The `Book.java` class was implemented by me by extending the `LibraryItems` clas
 * Polymorphism: The `getDetails()` method was overridden to display book-specific information.
 * Encapsulation: The `author` field was kept private, and getter and setter methods were used to access it.
 * Constructor: The book title and total number of copies were initialized using the parent class constructor.
+
+## Contributor
+
+* Nazia Tazkia - Task 2 (Book Class Implementation)
+  
