@@ -1,0 +1,9 @@
+### IntelliJ IDEA ###
+.idea/
+*.iml
+out/
+gen/
+
+### macOS / Windows Files ###
+.DS_Store
+Thumbs.db
