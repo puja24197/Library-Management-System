@@ -33,4 +33,16 @@ The `Book.java` class was implemented by me by extending the `LibraryItems` clas
 ## Contributor
 
 * Nazia Tazkia - Task 2 (Book Class Implementation)
-  
+
+  ## Task 3: Magazine Class Implementation
+
+  The Magazine.java class was implemented by me by extending the LibraryItems class.
+### OOP Concepts Applied:
+* Inheritance: The LibraryItems class was extended so that its common properties and methods could be used in the Magazine class.
+* Polymorphism: The getDetails() method was overridden to display magazine-specific information.
+* Encapsulation: The publisher field was kept private, and getter method was used to access it.
+* Constructor: The magazine title and total number of copies were initialized using the parent class constructor.
+
+### Contributor
+
+* Thamina Islam Tenni - Task 3 (Magazine Class Implementation)  
