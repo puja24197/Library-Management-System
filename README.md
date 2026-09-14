@@ -17,10 +17,8 @@ I have implemented the main abstract class `LibraryItems.java`. This class acts 
 
 ## Author
 * Puja Paul - Task 1 (LibraryItems Abstract Class)
-
-
-
-## Task 2: Book Class Implementation
+  
+## Task 1: Book Class Implementation
 
 The `Book.java` class was implemented by me by extending the `LibraryItems` class.
 
@@ -31,11 +29,9 @@ The `Book.java` class was implemented by me by extending the `LibraryItems` clas
 * Constructor: The book title and total number of copies were initialized using the parent class constructor.
 
 ## Contributor
+* Nazia Tazkia - Task 1 (Book Class Implementation)
 
-* Nazia Tazkia - Task 2 (Book Class Implementation)
-
-  ## Task 3: Magazine Class Implementation
-
+  ## Task 1: Magazine Class Implementation
   The Magazine.java class was implemented by me by extending the LibraryItems class.
 ### OOP Concepts Applied:
 * Inheritance: The LibraryItems class was extended so that its common properties and methods could be used in the Magazine class.
@@ -44,5 +40,23 @@ The `Book.java` class was implemented by me by extending the `LibraryItems` clas
 * Constructor: The magazine title and total number of copies were initialized using the parent class constructor.
 
 ### Contributor
+* Thamina Islam Tenni - Task 1 (Magazine Class Implementation)
 
-* Thamina Islam Tenni - Task 3 (Magazine Class Implementation)  
+## Task 2: File Handling 
+
+I have implemented the `FileManager.java` class. This class is used to save and load library data from a text file.
+
+### Features Implemented:
+
+* `saveData()` method saves all Books and Magazines into a file named `Mylibrary_data.txt`.
+* `loadData()` method reads the saved data from the file when the program starts.
+* Book and Magazine information is stored in comma-separated format.
+* If the data file does not exist, the program starts with an empty list.
+* Used exception handling to show error messages if there is a problem reading or writing the file.
+
+### File Format:
+* Book: `BOOK,Title,TotalCopies,Author`
+* Magazine: `MAGAZINE,Title,TotalCopies,Publisher`
+## Author
+* Puja Paul - Task 2 (File Handling)
+
