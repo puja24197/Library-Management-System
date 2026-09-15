@@ -73,7 +73,6 @@ I implemented complete CRUD operations inside the `LibraryService` class:
 * **Update — `processIssue(...)`:** I built this to lower the available copy count whenever a student borrows a book.
 * **Delete — `removeItem(String title)`:** I added this functionality to permanently delete an item from the catalog using its title.
 
-
 ## Data Management Strategy
 
 * **Purpose:** I designed the system around CRUD logic because a functional library requires basic tools to add new stock, update borrowed items, and clean up old records.
@@ -91,3 +90,4 @@ I implemented complete CRUD operations inside the `LibraryService` class:
 1. Clone or download my repository.
 2. Open the project in IntelliJ IDEA.
 3. Run `Main.java` to test adding items, issuing books, viewing the catalog, and saving data.
+* Nazia Tazkia - Task 2 (CRUD Operations)
