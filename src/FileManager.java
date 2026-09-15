@@ -9,7 +9,7 @@ public class FileManager {
                 for (LibraryItems item : items) {
                     if (item instanceof Book) {
                         Book b = (Book) item;
-                        writer.write("BOOK" + b.getTitle() +","+b.getTotalCopies()+ "," + b.getAuthor());
+                        writer.write("BOOK," + b.getTitle() +"," + b.getTotalCopies()+ "," + b.getAuthor());
                     } else if (item instanceof Magazine) {
                         Magazine m = (Magazine) item;
                         writer.write("MAGAZINE," + m.getTitle() + "," + m.getTotalCopies() + "," + m.getPublisher());
