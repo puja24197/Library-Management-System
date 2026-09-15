@@ -19,7 +19,7 @@ public class LibraryService {
         }
 
         if (item.getTotalCopies() <= 0) {
-            throw new CustomException("Minimum 1 copy is required!");
+            throw new CustomException("Minimum 1 copy is required ! ");
         }
 
         if (searchByTitle(title) != null) {
@@ -39,7 +39,7 @@ public class LibraryService {
 
         System.out.println("\n--- Current Library Inventory ---");
         for (LibraryItems item : catalog) {
-            System.out.println(item.getDetails());
+            System.out.println(item.getDetails() );
         }
     }
 
@@ -74,7 +74,7 @@ public class LibraryService {
         if (title == null) return null;
 
         for (LibraryItems item : catalog) {
-            if (item.getTitle().equalsIgnoreCase(title.trim())) {
+            if (item.getTitle().equalsIgnoreCase(title.trim() )) {
                 return item;
             }
         }
