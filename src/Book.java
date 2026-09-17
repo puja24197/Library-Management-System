@@ -13,7 +13,7 @@ public class Book extends LibraryItems {
     @Override
     public String getDetails() {
         if (isIssued()) {
-            return "Book Title: " + getTitle() + ", Author: " + author + ", Status: Issued to " + getStudentId();
+            return "Book Title: " + getTitle() + ", Author: " + author + ", Status: Issued to " + getMemberId();
         } else {
             return "Book Title: " + getTitle() + ", Author: " + author + ", Available: " + getAvailableCopies();
         }
