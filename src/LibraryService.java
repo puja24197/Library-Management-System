@@ -43,19 +43,19 @@ public class LibraryService {
         }
     }
 
-    public void processIssue(String title, String stId, String stEmail, int issueDay) throws CustomException {
+    public void processIssue(String title, String memberId, String memberEmail, int issueDay, int currentBorrowDate) throws CustomException {
         LibraryItems target = searchByTitle(title);
 
         if (target == null) {
             throw new CustomException("Process Failed: Title '" + title + "' was not found.");
         }
 
-        if (!target.issueToStudent(stId, stEmail, issueDay)) {
+        if (!target.issueItem(memberId, memberEmail, issueDay, currentBorrowDate)) {
             throw new CustomException("Process Failed: Copies unavailable for '" + title + "'.");
         }
 
         FileManager.saveData(catalog);
-        System.out.println("Success: Issued to Student ID " + stId);
+        System.out.println("Success: Issued to member ID " + memberId);
     }
 
     public void removeItem(String title) throws CustomException {
