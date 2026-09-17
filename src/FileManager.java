@@ -9,10 +9,10 @@ public class FileManager {
                 for (LibraryItems item : items) {
                     if (item instanceof Book) {
                         Book b = (Book) item;
-                        writer.write("BOOK," + b.getTitle() +"," + b.getTotalCopies()+ "," + b.getAuthor());
+                        writer.write("BOOK," + b.getTitle() +"," + b.getTotalCopies()+ "," + b.getAuthor()+ "," + b.isIssued());
                     } else if (item instanceof Magazine) {
                         Magazine m = (Magazine) item;
-                        writer.write("MAGAZINE," + m.getTitle() + "," + m.getTotalCopies() + "," + m.getPublisher());
+                        writer.write("MAGAZINE," + m.getTitle() + "," + m.getTotalCopies() + "," + m.getPublisher()+ "," + m.isIssued());
                     }
                     writer.newLine();
                 }
@@ -29,7 +29,7 @@ public class FileManager {
 
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 String line;
-                while ((line = reader.readLine()) != null) {
+                while ((line = reader.readLine())!= null) {
                     String[] parts = line.split(",");
                     if (parts[0].equals("BOOK")) {
                         items.add(new Book(parts[1], Integer.parseInt(parts[2]), parts[3]));
