@@ -15,7 +15,7 @@ public class Magazine extends LibraryItems {
     @Override
     public String getDetails() {
         if (isIssued()) {
-            return "Magazine Title: " + getTitle() + ", Publisher: " + publisher + ", Status: Issued to " + getStudentId();
+            return "Magazine Title: " + getTitle() + ", Publisher: " + publisher + ", Status: Issued to " + getMemberId();
         } else {
             return "Magazine Title: " + getTitle() + ", Publisher: " + publisher + ", Available: " + getAvailableCopies();
         }
