@@ -33,7 +33,7 @@ public abstract class LibraryItems {
         return 15; 
 }
 
-    public boolean issueItem(String memberId, String memberEmail, String memberType, int currentDate, int currentBorrowedCount) {
+    public boolean issueItem(String memberId, String memberType, int currentDate, int currentBorrowedCount) {
         int maxAllowed = getMaxAllowedBooks(memberType);
         int allowedDays = getMaxBorrowDays(memberType);
         if (availableCopies > 0 && currentBorrowedCount <= maxAllowed) {
