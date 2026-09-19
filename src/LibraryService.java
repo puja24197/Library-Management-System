@@ -1,5 +1,5 @@
-import java.util.ArrayList;
 import java.util.List;
+import Exception.*;
 
 public class LibraryService {
     private final List<LibraryItems> catalog;
@@ -8,22 +8,22 @@ public class LibraryService {
         this.catalog = FileManager.loadData();
     }
 
-    public void registerItem(LibraryItems item) throws CustomException {
+    public void registerItem(LibraryItems item) throws Exception {
         if (item == null) {
-            throw new CustomException("Item record cannot be null!");
+            throw new Exception("Item record cannot be null!");
         }
 
         String title = item.getTitle();
         if (title == null || title.trim().isEmpty()) {
-            throw new CustomException("Title mandatory for insertion!");
+            throw new Exception("Title mandatory for insertion!");
         }
 
         if (item.getTotalCopies() <= 0) {
-            throw new CustomException("Minimum 1 copy is required ! ");
+            throw new Exception("Minimum 1 copy is required ! ");
         }
 
         if (searchByTitle(title) != null) {
-            throw new CustomException("An item with title '" + title + "' already exists!");
+            throw new Exception("An item with title '" + title + "' already exists!");
         }
 
         catalog.add(item);
@@ -37,32 +37,33 @@ public class LibraryService {
             return;
         }
 
-        System.out.println("\n--- Current Library Inventory ---");
+        System.out.println("\n Current Library Inventory ");
         for (LibraryItems item : catalog) {
             System.out.println(item.getDetails() );
         }
     }
 
-    public void processIssue(String title, String memberId, String memberEmail, int issueDay, int currentBorrowDate) throws CustomException {
+    public void processIssue(String title, String memberId, String memberEmail, int issueDay, int currentBorrowDate) 
+    throws Exception {
         LibraryItems target = searchByTitle(title);
 
         if (target == null) {
-            throw new CustomException("Process Failed: Title '" + title + "' was not found.");
+            throw new Exception("Process Failed: Title '" + title + "' was not found.");
         }
 
         if (!target.issueItem(memberId, memberEmail, issueDay, currentBorrowDate)) {
-            throw new CustomException("Process Failed: Copies unavailable for '" + title + "'.");
+            throw new Exception("Process Failed: Copies unavailable for '" + title + "'.");
         }
 
         FileManager.saveData(catalog);
         System.out.println("Success: Issued to member ID " + memberId);
     }
 
-    public void removeItem(String title) throws CustomException {
+    public void removeItem(String title) throws Exception {
         LibraryItems target = searchByTitle(title);
 
         if (target == null) {
-            throw new CustomException("Deletion Error: Cannot find item titled '" + title + "'.");
+            throw new Exception("Deletion Error: Cannot find item titled '" + title + "'.");
         }
 
         catalog.remove(target);
