@@ -1,0 +1,5 @@
+BOOK,Java Concepts,3,James Gosling,false
+MAGAZINE,Tech Today,2,IDG,false
+BOOK,Java Basics,7,Pagol,false
+BOOK,Python Programming,4,Goru,false
+BOOK,C++ Basics,6,more,false
