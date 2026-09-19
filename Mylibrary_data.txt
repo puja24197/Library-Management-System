@@ -1,0 +1,2 @@
+BOOK,Java Basics,3,Faculty,false
+BOOK,Python Programming,7,Pagol,false
