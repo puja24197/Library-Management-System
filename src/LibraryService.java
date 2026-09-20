@@ -1,29 +1,32 @@
 import java.util.List;
-import Exception.*;
+import Exception.InvalidInputException;
+import Exception.ItemNotFoundException;
+import Exception.MemberNotFoundException;
 
 public class LibraryService {
     private final List<LibraryItems> catalog;
 
     public LibraryService() {
+
         this.catalog = FileManager.loadData();
     }
 
-    public void registerItem(LibraryItems item) throws Exception {
+    public void registerItem(LibraryItems item) throws InvalidInputException {
         if (item == null) {
-            throw new Exception("Item record cannot be null!");
+            throw new InvalidInputException("Item record cannot be null!");
         }
 
         String title = item.getTitle();
         if (title == null || title.trim().isEmpty()) {
-            throw new Exception("Title mandatory for insertion!");
+            throw new InvalidInputException("Title mandatory for insertion !");
         }
 
         if (item.getTotalCopies() <= 0) {
-            throw new Exception("Minimum 1 copy is required ! ");
+            throw new InvalidInputException("Minimum 1 copy is required ! ");
         }
 
         if (searchByTitle(title) != null) {
-            throw new Exception("An item with title '" + title + "' already exists!");
+            throw new InvalidInputException("An item with title '" + title + "' already exists!");
         }
 
         catalog.add(item);
@@ -43,27 +46,30 @@ public class LibraryService {
         }
     }
 
-    public void processIssue(String title, String memberId, String memberEmail, int issueDay, int currentBorrowDate) 
-    throws Exception {
+    public void processIssue(String title, String memberId, String memberEmail,String memberType, int issueDate, int currentBorrowDate)
+    throws ItemNotFoundException, InvalidInputException, MemberNotFoundException {
         LibraryItems target = searchByTitle(title);
 
         if (target == null) {
-            throw new Exception("Process Failed: Title '" + title + "' was not found.");
+            throw new ItemNotFoundException("Process Failed: Title '" + title + "' was not found.");
+        }
+        if (memberId == null || memberId.trim().isEmpty() || !memberId.startsWith("M")) {
+            throw new MemberNotFoundException("Member with ID'" +memberId+"'not found in the databas!");
         }
 
-        if (!target.issueItem(memberId, memberEmail, issueDay, currentBorrowDate)) {
-            throw new Exception("Process Failed: Copies unavailable for '" + title + "'.");
+        if (!target.issueItem(memberId, memberEmail, memberType,issueDate, currentBorrowDate)) {
+            throw new InvalidInputException("Process Failed: Copies unavailable for '" + title + "'.");
         }
 
         FileManager.saveData(catalog);
         System.out.println("Success: Issued to member ID " + memberId);
     }
 
-    public void removeItem(String title) throws Exception {
+    public void removeItem(String title) throws ItemNotFoundException, InvalidInputException {
         LibraryItems target = searchByTitle(title);
 
         if (target == null) {
-            throw new Exception("Deletion Error: Cannot find item titled '" + title + "'.");
+            throw new ItemNotFoundException("Deletion Error: Cannot find item titled '" + title + "'.");
         }
 
         catalog.remove(target);
@@ -83,6 +89,8 @@ public class LibraryService {
     }
 
     public List<LibraryItems> getCatalog() {
+
         return catalog;
+
     }
 }

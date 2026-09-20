@@ -33,7 +33,7 @@ public abstract class LibraryItems {
         return 15; 
 }
 
-    public boolean issueItem(String memberId, String memberType, int currentDate, int currentBorrowedCount) {
+    public boolean issueItem(String memberId, String memberType,String memberEmail, int currentDate, int currentBorrowedCount) {
         int maxAllowed = getMaxAllowedBooks(memberType);
         int allowedDays = getMaxBorrowDays(memberType);
         if (availableCopies > 0 && currentBorrowedCount <= maxAllowed) {
@@ -88,15 +88,18 @@ public abstract class LibraryItems {
         return isIssued ;
     }
     public String getMemberId() {
+
         return memberId;
     }
     public String getMemberEmail() {
         return memberEmail;
     }
     public int getTotalCopies() {
+
         return totalCopies;
     }
     public int getAvailableCopies(){
+
         return availableCopies;
     }
     public int getDueDate() {
