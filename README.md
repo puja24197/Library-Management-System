@@ -1,48 +1,58 @@
 # Library Management System
+
 This is a Java project for a Library Management System created using OOP concepts.
+
 ## Task 1: Core Implementation
 
 I have implemented the main abstract class `LibraryItems.java`. This class acts as a base model for all library items.
 
 ### OOP Concepts Applied:
-* Abstraction: Created the `LibraryItems` abstract class and defined an abstract method `getDetails()`.
-* Encapsulation: Made variables like `id`, `title`, `totalCopies`, `availableCopies`, `isIssued`, and `studentId` private, and used public getter/setter methods.
-* Logic: Added `issueToStudent()` and `returnFromStudent()` methods to handle copy counts and student issuance states.
+* **Abstraction:** Created the `LibraryItems` abstract class and defined an abstract method `getDetails()`.
+* **Encapsulation:** Made variables like `id`, `title`, `totalCopies`, `availableCopies`, `isIssued`, and `studentId` private, and used public getter/setter methods.
+* **Logic:** Added `issueToStudent()` and `returnFromStudent()` methods to handle copy counts and student issuance states.
 
 ## Tools Used
 * Java
 * IntelliJ IDEA
-* Git bash & GitHub
+* Git Bash & GitHub
 * Docs
 
 ## Author
 * Puja Paul - Task 1 (LibraryItems Abstract Class)
-  
+
+---
+
 ## Task 1: Book Class Implementation
 
 The `Book.java` class was implemented by me by extending the `LibraryItems` class.
 
 ### OOP Concepts Applied:
-* Inheritance: The `LibraryItems` class was extended so that its common properties and methods could be used in the `Book` class.
-* Polymorphism: The `getDetails()` method was overridden to display book-specific information.
-* Encapsulation: The `author` field was kept private, and getter and setter methods were used to access it.
-* Constructor: The book title and total number of copies were initialized using the parent class constructor.
+* **Inheritance:** The `LibraryItems` class was extended so that its common properties and methods could be used in the `Book` class.
+* **Polymorphism:** The `getDetails()` method was overridden to display book-specific information.
+* **Encapsulation:** The `author` field was kept private, and getter and setter methods were used to access it.
+* **Constructor:** The book title and total number of copies were initialized using the parent class constructor.
 
 ## Contributor
 * Nazia Tazkia - Task 1 (Book Class Implementation)
 
-  ## Task 1: Magazine Class Implementation
-  The Magazine.java class was implemented by me by extending the LibraryItems class.
+---
+
+## Task 1: Magazine Class Implementation
+
+The `Magazine.java` class was implemented by me by extending the `LibraryItems` class.
+
 ### OOP Concepts Applied:
-* Inheritance: The LibraryItems class was extended so that its common properties and methods could be used in the Magazine class.
-* Polymorphism: The getDetails() method was overridden to display magazine-specific information.
-* Encapsulation: The publisher field was kept private, and getter method was used to access it.
-* Constructor: The magazine title and total number of copies were initialized using the parent class constructor.
+* **Inheritance:** The `LibraryItems` class was extended so that its common properties and methods could be used in the `Magazine` class.
+* **Polymorphism:** The `getDetails()` method was overridden to display magazine-specific information.
+* **Encapsulation:** The `publisher` field was kept private, and a getter method was used to access it.
+* **Constructor:** The magazine title and total number of copies were initialized using the parent class constructor.
 
 ### Contributor
 * Thamina Islam Tenni - Task 1 (Magazine Class Implementation)
 
-## Task 2: File Handling 
+---
+
+# Task 2: File Handling
 
 I have implemented the `FileManager.java` class. This class is used to save and load library data from a text file.
 
@@ -57,37 +67,56 @@ I have implemented the `FileManager.java` class. This class is used to save and 
 ### File Format:
 * Book: `BOOK,Title,TotalCopies,Author`
 * Magazine: `MAGAZINE,Title,TotalCopies,Publisher`
+
 ## Author
 * Puja Paul - Task 2 (File Handling)
 
+---
 
-##Task 2 CRUD Operations 
+# Task 2: CRUD Operations
 
-I have handle CRUD to manage a library catalog, track borrowed books, and save all data automatically to a local file.
+I have handled CRUD operations to manage a library catalog, track borrowed books, and automatically save all data to a local file.
 
-I implemented complete CRUD operations inside the `LibraryService` class:
+I implemented CRUD operations inside the `LibraryService` class:
 
-* **Create — `registerItem(LibraryItems item)`:** I wrote this method to add new books or magazines. I added validation logic to block empty titles, invalid copy counts, or duplicate records.
-* **Read — `showCatalog()`:** I created this method to display the full inventory list on the console.
-* **Read — `searchByTitle(String title)`:** I implemented case-insensitive searching to easily find specific items by name.
-* **Update — `processIssue(...)`:** I built this to lower the available copy count whenever a student borrows a book.
-* **Delete — `removeItem(String title)`:** I added this functionality to permanently delete an item from the catalog using its title.
+* **Create — `registerItem(LibraryItems item)`:** Adds new books or magazines to the library catalog. Validation is included to prevent empty titles, invalid copy counts, and duplicate records.
+
+* **Read — `showCatalog()`:** Displays the complete library inventory on the console.
+
+* **Read — `searchByTitle(String title)`:** Searches for a specific library item by title using case-insensitive comparison.
+
+* **Update — `updateBook(...)`:** Updates the information of a specific book, including its title, total number of copies, and author. The updated information is automatically saved to the data file.
+
+* **Delete — `removeItem(String title)`:** Deletes a specific library item from the catalog using its title and automatically updates the data file.
+
+* **Issue — `processIssue(...)`:** Processes the borrowing of a library item and updates its available copy information.
 
 ## Data Management Strategy
 
-* **Purpose:** I designed the system around CRUD logic because a functional library requires basic tools to add new stock, update borrowed items, and clean up old records.
-* **Execution:** I stored active records in an `ArrayList` inside `LibraryService`. After every add, update, or delete action, I trigger `FileManager.saveData(catalog)` to keep my text file updated.
+* **Purpose:** The system uses CRUD operations to provide the basic functionality required for managing library items, including adding, viewing, updating, issuing, and deleting records.
+
+* **Execution:** Active library records are stored in an `ArrayList` inside `LibraryService`. After every create, update, issue, or delete operation, `FileManager.saveData(catalog)` is called to synchronize the in-memory data with the local text file.
 
 ## Tools and Technologies Used
 
-* **Java & ArrayList:** I used Java for the application logic and `ArrayList` for in-memory data management.
-* **`CustomException`:** I built custom error handling to print clear error messages for bad inputs.
-* **FileManager Integration:** I connected my service class with `FileManager` to load data on startup and auto-save changes.
-* **IntelliJ IDEA & Git/GitHub:** I used IntelliJ IDEA as my IDE and Git/GitHub for branch management and version control.
+* **Java & ArrayList:** Java is used for application logic and `ArrayList` is used for in-memory data management.
+* **Custom Exceptions:** Custom exceptions are used to provide clear error messages for invalid inputs and missing records.
+* **FileManager Integration:** `LibraryService` is connected with `FileManager` to load data when the application starts and automatically save changes.
+* **IntelliJ IDEA & Git/GitHub:** IntelliJ IDEA is used as the development environment, while Git/GitHub is used for version control and branch management.
 
 ## Project Setup and Execution
 
-1. Clone or download my repository.
+1. Clone or download the repository.
 2. Open the project in IntelliJ IDEA.
-3. Run `Main.java` to test adding items, issuing books, viewing the catalog, and saving data.
+3. Run `Main.java`.
+4. Test adding, searching, updating, deleting, and issuing library items.
+5. Verify that changes are automatically saved to `Mylibrary_data.txt`.
+
+## Contributors
+
+* Puja Paul - Task 1 (LibraryItems Abstract Class)
+* Nazia Tazkia - Task 1 (Book Class Implementation)
+* Thamina Islam Tenni - Task 1 (Magazine Class Implementation)
+* Puja Paul - Task 2 (File Handling)
 * Nazia Tazkia - Task 2 (CRUD Operations)
+* **Thamina Islam Tenni - Task 2 (Update and Delete Operations)**
