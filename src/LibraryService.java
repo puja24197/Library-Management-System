@@ -57,7 +57,7 @@ public class LibraryService {
             throw new MemberNotFoundException("Member with ID'" +memberId+"'not found in the databas!");
         }
 
-        if (!target.issueItem(memberId, memberEmail, memberType,issueDate, currentBorrowDate)) {
+        if (!target.issueItem(memberId, memberType, memberEmail,issueDate, currentBorrowDate)) {
             throw new InvalidInputException("Process Failed: Copies unavailable for '" + title + "'.");
         }
 

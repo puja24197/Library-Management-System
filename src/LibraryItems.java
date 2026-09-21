@@ -125,5 +125,15 @@ public abstract class LibraryItems {
     public void setMemberEmail(String memberEmail) {
         this.memberEmail = memberEmail;
     }
+    public void setIssued(boolean isIssued) {
+        this.isIssued = isIssued;
+    }
+    public void setDueDate(int dueDate) {
+        this.dueDate = dueDate;
+    }
+
+
 }
+
+
 
