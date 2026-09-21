@@ -54,11 +54,11 @@ public class LibraryService {
             throw new ItemNotFoundException("Process Failed: Title '" + title + "' was not found.");
         }
         if (memberId == null || memberId.trim().isEmpty() || !memberId.startsWith("M")) {
-            throw new MemberNotFoundException("Member with ID'" +memberId+"'not found in the databas!");
+            throw new MemberNotFoundException("Member with ID'" +memberId+"'not found in the database!");
         }
 
         if (!target.issueItem(memberId, memberType, memberEmail,issueDate, currentBorrowDate)) {
-            throw new InvalidInputException("Process Failed: Copies unavailable for '" + title + "'.");
+            throw new InvalidInputException("Process Failed: Copies unavailable for'" + title + "'.");
         }
 
         FileManager.saveData(catalog);
@@ -129,8 +129,6 @@ public class LibraryService {
         }
 
         Book book = (Book) target;
-
-        // Check whether new title is already used by another item
         LibraryItems existing = searchByTitle(newTitle);
 
         if (existing != null && existing != target) {
