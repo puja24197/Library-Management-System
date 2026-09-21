@@ -43,4 +43,9 @@ public class FileManager {
             }
             return items;
         }
+
+        public static List<LibraryItems> deleteData(){
+
+        }
+
     }

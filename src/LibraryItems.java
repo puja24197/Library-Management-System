@@ -103,6 +103,27 @@ public abstract class LibraryItems {
         return availableCopies;
     }
     public int getDueDate() {
-        return dueDate; }
+        return dueDate;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setTotalCopies(int totalCopies) {
+        this.totalCopies = totalCopies;
+    }
+
+    public void setAvailableCopies(int availableCopies) {
+        this.availableCopies = availableCopies;
+    }
+
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
+    }
+
+    public void setMemberEmail(String memberEmail) {
+        this.memberEmail = memberEmail;
+    }
 }
 
