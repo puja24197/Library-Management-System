@@ -93,4 +93,139 @@ public class LibraryService {
         return catalog;
 
     }
+
+
+    public void updateBook(
+            String oldTitle,
+            String newTitle,
+            int newTotalCopies,
+            String newAuthor
+    ) throws ItemNotFoundException, InvalidInputException {
+
+        LibraryItems target = searchByTitle(oldTitle);
+
+        if (target == null) {
+            throw new ItemNotFoundException(
+                    "Update Error: Item '" + oldTitle + "' was not found."
+            );
+        }
+
+        if (!(target instanceof Book)) {
+            throw new InvalidInputException(
+                    "Update Error: The selected item is not a Book."
+            );
+        }
+
+        if (newTitle == null || newTitle.trim().isEmpty()) {
+            throw new InvalidInputException(
+                    "Title cannot be empty."
+            );
+        }
+
+        if (newTotalCopies <= 0) {
+            throw new InvalidInputException(
+                    "Total copies must be greater than 0."
+            );
+        }
+
+        Book book = (Book) target;
+
+        // Check whether new title is already used by another item
+        LibraryItems existing = searchByTitle(newTitle);
+
+        if (existing != null && existing != target) {
+            throw new InvalidInputException(
+                    "An item with title '" + newTitle + "' already exists."
+            );
+        }
+
+        int oldTotalCopies = book.getTotalCopies();
+        int oldAvailableCopies = book.getAvailableCopies();
+
+        int issuedCopies = oldTotalCopies - oldAvailableCopies;
+
+        if (newTotalCopies < issuedCopies) {
+            throw new InvalidInputException(
+                    "New total copies cannot be less than currently issued copies."
+            );
+        }
+
+        int newAvailableCopies = newTotalCopies - issuedCopies;
+
+        book.setTitle(newTitle);
+        book.setTotalCopies(newTotalCopies);
+        book.setAvailableCopies(newAvailableCopies);
+        book.setAuthor(newAuthor);
+
+        FileManager.saveData(catalog);
+
+        System.out.println("Success: Book updated and file updated.");
+    }
+
+
+    public void updateMagazine(
+            String oldTitle,
+            String newTitle,
+            int newTotalCopies,
+            String newPublisher
+    ) throws ItemNotFoundException, InvalidInputException {
+
+        LibraryItems target = searchByTitle(oldTitle);
+
+        if (target == null) {
+            throw new ItemNotFoundException(
+                    "Update Error: Item '" + oldTitle + "' was not found."
+            );
+        }
+
+        if (!(target instanceof Magazine)) {
+            throw new InvalidInputException(
+                    "Update Error: The selected item is not a Magazine."
+            );
+        }
+
+        if (newTitle == null || newTitle.trim().isEmpty()) {
+            throw new InvalidInputException(
+                    "Title cannot be empty."
+            );
+        }
+
+        if (newTotalCopies <= 0) {
+            throw new InvalidInputException(
+                    "Total copies must be greater than 0."
+            );
+        }
+
+        Magazine magazine = (Magazine) target;
+
+        LibraryItems existing = searchByTitle(newTitle);
+
+        if (existing != null && existing != target) {
+            throw new InvalidInputException(
+                    "An item with title '" + newTitle + "' already exists."
+            );
+        }
+
+        int oldTotalCopies = magazine.getTotalCopies();
+        int oldAvailableCopies = magazine.getAvailableCopies();
+
+        int issuedCopies = oldTotalCopies - oldAvailableCopies;
+
+        if (newTotalCopies < issuedCopies) {
+            throw new InvalidInputException(
+                    "New total copies cannot be less than currently issued copies."
+            );
+        }
+
+        int newAvailableCopies = newTotalCopies - issuedCopies;
+
+        magazine.setTitle(newTitle);
+        magazine.setTotalCopies(newTotalCopies);
+        magazine.setAvailableCopies(newAvailableCopies);
+        magazine.setPublisher(newPublisher);
+
+        FileManager.saveData(catalog);
+
+        System.out.println("Success: Magazine updated and file updated.");
+    }
 }

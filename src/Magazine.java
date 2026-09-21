@@ -20,4 +20,8 @@ public class Magazine extends LibraryItems {
             return "Magazine Title: " + getTitle() + ", Publisher: " + publisher + ", Available: " + getAvailableCopies();
         }
     }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
 }

@@ -18,4 +18,7 @@ public class Book extends LibraryItems {
             return "Book Title: " + getTitle() + ", Author: " + author + ", Available: " + getAvailableCopies();
         }
     }
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 }
