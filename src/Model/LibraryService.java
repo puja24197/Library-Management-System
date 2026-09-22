@@ -1,7 +1,9 @@
+package Model;
 import java.util.List;
 import Exception.InvalidInputException;
 import Exception.ItemNotFoundException;
 import Exception.MemberNotFoundException;
+import Model.FileManager;
 
 public class LibraryService {
     private final List<LibraryItems> catalog;

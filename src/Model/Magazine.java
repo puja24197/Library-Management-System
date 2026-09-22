@@ -1,3 +1,4 @@
+package Model;
 public class Magazine extends LibraryItems {
     private String publisher;
     private String experience;

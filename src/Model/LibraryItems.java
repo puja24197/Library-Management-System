@@ -1,3 +1,4 @@
+package Model;
 public abstract class LibraryItems {
     private String title;
     private boolean isIssued ;

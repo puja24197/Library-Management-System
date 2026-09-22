@@ -54,7 +54,7 @@ The `Magazine.java` class was implemented by me by extending the `LibraryItems` 
 
 # Task 2: File Handling
 
-I have implemented the `FileManager.java` class. This class is used to save and load library data from a text file.
+I have implemented the `Model.FileManager.java` class. This class is used to save and load library data from a text file.
 
 ### Features Implemented:
 
@@ -95,13 +95,13 @@ I implemented CRUD operations inside the `LibraryService` class:
 
 * **Purpose:** The system uses CRUD operations to provide the basic functionality required for managing library items, including adding, viewing, updating, issuing, and deleting records.
 
-* **Execution:** Active library records are stored in an `ArrayList` inside `LibraryService`. After every create, update, issue, or delete operation, `FileManager.saveData(catalog)` is called to synchronize the in-memory data with the local text file.
+* **Execution:** Active library records are stored in an `ArrayList` inside `LibraryService`. After every create, update, issue, or delete operation, `Model.FileManager.saveData(catalog)` is called to synchronize the in-memory data with the local text file.
 
 ## Tools and Technologies Used
 
 * **Java & ArrayList:** Java is used for application logic and `ArrayList` is used for in-memory data management.
 * **Custom Exceptions:** Custom exceptions are used to provide clear error messages for invalid inputs and missing records.
-* **FileManager Integration:** `LibraryService` is connected with `FileManager` to load data when the application starts and automatically save changes.
+* **Model.FileManager Integration:** `LibraryService` is connected with `Model.FileManager` to load data when the application starts and automatically save changes.
 * **IntelliJ IDEA & Git/GitHub:** IntelliJ IDEA is used as the development environment, while Git/GitHub is used for version control and branch management.
 
 ## Project Setup and Execution
