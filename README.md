@@ -138,3 +138,30 @@ I refactored the codebase into a clean, modular architecture separating the data
 * Nazia Tazkia - Task 2 (CRUD Operations)
 * **Thamina Islam Tenni - Task 2 (Update and Delete Operations)**
 * Puja Rani Paul - (ViewCatalogPanel)
+
+
+## 🛠️ Features & Technical Implementation
+
+Here is a breakdown of the core components and features implemented in MainFrame.java and IssueItemPanel.java:
+
+### 1. Main Infrastructure & Navigation (MainFrame.java)
+* *Swing GUI Framework:* Built using Java Swing (JFrame, JTabbedPane) for a clean desktop graphical user interface.
+* *Tabbed Interface:* Integrated multiple panel modules (ViewCatalogPanel, AddItemPanel, IssueItemPanel) into a single window for intuitive navigation.
+* *Dynamic Event Listening (ChangeListener):* Implemented tab change listeners to automatically refresh the library catalog whenever the "View Catalog" tab is selected.
+* *Thread-Safe Launching:* Used SwingUtilities.invokeLater() to safely initialize and render the GUI on the Event Dispatch Thread (EDT).
+
+### 2. Issue Item Module (IssueItemPanel.java)
+* *Interactive Form Elements:* Utilized JTextField, JComboBox, JLabel, and JButton structured inside a clean GridLayout(6, 2) format.
+* *Data Input Processing:* Captures essential borrowing details including Item Title, Member ID, Email, Member Type (Student/Faculty), and Current Borrowed Count.
+* *Robust Exception Handling:*
+  * *Number Format Validation:* Prevents crashes by catching NumberFormatException if non-numeric values are entered for borrow count.
+  * *Custom Domain Exceptions:* Safely catches and displays alerts for ItemNotFoundException, MemberNotFoundException, and InvalidInputException.
+* *User Feedback & State Reset:* Displays interactive pop-up alerts (JOptionPane) for success and error states, and automatically resets form input fields via a helper method clearFields().
+
+---
+
+### 💻 Technologies & Libraries Used
+* *Language:* Java
+* *UI Framework:* Java Swing & AWT (javax.swing.*, java.awt.*)
+* *Architecture:* Modular Component-based Design (Service & Panel Separation)
+*Nazia tazkia (MainFrame.java,IssueItemPanel.java)
