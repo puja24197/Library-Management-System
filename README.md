@@ -18,7 +18,7 @@ I have implemented the main abstract class `LibraryItems.java`. This class acts 
 * Docs
 
 ## Author
-* Puja Paul - Task 1 (LibraryItems Abstract Class)
+* Puja Rani Paul - Task 1 (LibraryItems Abstract Class)
 
 ---
 
@@ -69,9 +69,9 @@ I have implemented the `Model.FileManager.java` class. This class is used to sav
 * Magazine: `MAGAZINE,Title,TotalCopies,Publisher`
 
 ## Author
-* Puja Paul - Task 2 (File Handling)
+* Puja Rani Paul - Task 2 (File Handling)
 
----
+
 
 # Task 2: CRUD Operations
 
@@ -112,11 +112,29 @@ I implemented CRUD operations inside the `LibraryService` class:
 4. Test adding, searching, updating, deleting, and issuing library items.
 5. Verify that changes are automatically saved to `Mylibrary_data.txt`.
 
+
+   ## 🛠️Task 3: Project Refactoring & Architecture 
+
+I refactored the codebase into a clean, modular architecture separating the data layer,business logic, and presentation layer (GUI).
+### 📁 Package Structure
+* **`Model/`**: Contains core data models and file handling logic.
+  * `LibraryItems.java`: Abstract base class for all library items.
+  * `Book.java` & `Magazine.java`: Concrete implementations of items.
+  * `LibraryService.java`: Business logic layer for operations (add, issue, return).
+  * `FileManager.java`: File persistence layer for saving and loading data.
+* **`LibraryGUI/`**: Contains Swing-based User Interface components.
+  * `ViewCatalogPanel.java`: GUI component for searching, displaying, and filtering all library items.
+### 🎨 GUI Highlights
+* **Catalog View (`ViewCatalogPanel`)**:
+  * Displays books and magazines dynamically in a tabular format.
+  * Interactive UI components for seamless navigation and item lookup.
+
 ## Contributors
 
-* Puja Paul - Task 1 (LibraryItems Abstract Class)
+* Puja Rani Paul - Task 1 (LibraryItems Abstract Class)
 * Nazia Tazkia - Task 1 (Book Class Implementation)
 * Thamina Islam Tenni - Task 1 (Magazine Class Implementation)
-* Puja Paul - Task 2 (File Handling)
+* Puja Rani Paul - Task 2 (File Handling+Exception)
 * Nazia Tazkia - Task 2 (CRUD Operations)
 * **Thamina Islam Tenni - Task 2 (Update and Delete Operations)**
+* Puja Rani Paul - (ViewCatalogPanel)
