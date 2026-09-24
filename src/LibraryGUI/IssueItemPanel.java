@@ -5,6 +5,7 @@ import java.awt.*;
 import Exception.InvalidInputException;
 import Exception.ItemNotFoundException;
 import Exception.MemberNotFoundException;
+import Model.LibraryService;
 
 public class IssueItemPanel extends JPanel {
     private LibraryService libraryService;

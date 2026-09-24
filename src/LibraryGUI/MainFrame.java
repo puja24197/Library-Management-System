@@ -1,5 +1,7 @@
 package LibraryGUI;
 
+import Model.LibraryService;
+
 import javax.swing.*;
 
 public class MainFrame extends JFrame {
@@ -15,16 +17,13 @@ public class MainFrame extends JFrame {
 
         JTabbedPane tabbedPane = new JTabbedPane();
 
-        // Adding Panels built by 3 members
         ViewCatalogPanel viewPanel = new ViewCatalogPanel(libraryService);
-        AddItemPanel addPanel = new AddItemPanel(libraryService);
         IssueItemPanel issuePanel = new IssueItemPanel(libraryService);
 
         tabbedPane.addTab("View Catalog", viewPanel);
-        tabbedPane.addTab("Add / Update Item", addPanel);
+
         tabbedPane.addTab("Issue Item", issuePanel);
 
-        // Auto Refresh Catalog when tab is switched to View
         tabbedPane.addChangeListener(e -> {
             if (tabbedPane.getSelectedIndex() == 0) {
                 viewPanel.refreshCatalog();
