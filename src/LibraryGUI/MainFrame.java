@@ -48,7 +48,7 @@ public class MainFrame extends JFrame {
         // ==========================================
 
         setTitle(
-                "Library Management System"
+                "AYON MIYA PUBLIC LIBRARY"
         );
 
         setSize(
@@ -110,7 +110,7 @@ public class MainFrame extends JFrame {
 
         JLabel titleLabel =
                 new JLabel(
-                        "LIBRARY MANAGEMENT SYSTEM",
+                        "AYON MIYA PUBLIC LIBRARY",
                         SwingConstants.CENTER
                 );
 

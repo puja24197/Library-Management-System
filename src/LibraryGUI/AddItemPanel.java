@@ -46,7 +46,7 @@ public class AddItemPanel extends JPanel {
             new Color(226, 232, 240);
 
     private final Color TEXT_COLOR =
-            new Color(31, 41, 55);
+            new Color(17, 86, 145 );
 
     private final Color SUBTITLE_COLOR =
             new Color(100, 116, 139);
