@@ -2,23 +2,19 @@ package LibraryGUI;
 
 import Exception.InvalidInputException;
 import Exception.ItemNotFoundException;
-import Exception.MemberNotFoundException;
 import Model.LibraryService;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class IssueItemPanel extends JPanel {
+public class DeleteItemPanel extends JPanel {
 
     private LibraryService libraryService;
 
     private JTextField txtTitle;
-    private JTextField txtMemberId;
-    private JTextField txtEmail;
-    private JTextField txtIssueDay;
-
-    private JComboBox<String> comboType;
+    private JButton btnDelete;
+    private JButton btnClear;
 
     // ==========================================
     // COLORS
@@ -30,11 +26,11 @@ public class IssueItemPanel extends JPanel {
     private final Color CARD_COLOR =
             Color.WHITE;
 
-    private final Color PRIMARY =
-            new Color(79, 70, 229);
+    private final Color DANGER =
+            new Color(220, 38, 38);
 
-    private final Color PRIMARY_HOVER =
-            new Color(67, 56, 202);
+    private final Color DANGER_HOVER =
+            new Color(185, 28, 28);
 
     private final Color SECONDARY =
             new Color(226, 232, 240);
@@ -45,13 +41,10 @@ public class IssueItemPanel extends JPanel {
     private final Color SUBTITLE_COLOR =
             new Color(100, 116, 139);
 
-    private final Color INFO_BG =
-            new Color(238, 242, 255);
+    private final Color WARNING_BG =
+            new Color(254, 242, 242);
 
-    private final Color INFO_TEXT =
-            new Color(55, 48, 163);
-
-    public IssueItemPanel(LibraryService service) {
+    public DeleteItemPanel(LibraryService service) {
 
         this.libraryService = service;
 
@@ -90,7 +83,7 @@ public class IssueItemPanel extends JPanel {
 
         JLabel titleLabel =
                 new JLabel(
-                        "Issue Library Item",
+                        "Delete Library Item",
                         SwingConstants.CENTER
                 );
 
@@ -107,12 +100,12 @@ public class IssueItemPanel extends JPanel {
         );
 
         titleLabel.setForeground(
-                PRIMARY
+                DANGER
         );
 
         JLabel subtitleLabel =
                 new JLabel(
-                        "Issue a book or magazine to a library member",
+                        "Remove an item from the library",
                         SwingConstants.CENTER
                 );
 
@@ -168,10 +161,10 @@ public class IssueItemPanel extends JPanel {
                                 new Color(226, 232, 240)
                         ),
                         new EmptyBorder(
-                                20,
-                                30,
-                                20,
-                                30
+                                25,
+                                35,
+                                25,
+                                35
                         )
                 )
         );
@@ -181,9 +174,9 @@ public class IssueItemPanel extends JPanel {
 
         gbc.insets =
                 new Insets(
-                        7,
                         10,
-                        7,
+                        10,
+                        10,
                         10
                 );
 
@@ -193,93 +186,31 @@ public class IssueItemPanel extends JPanel {
         gbc.weightx = 1.0;
 
         // ==========================================
-        // ITEM TITLE
+        // TITLE LABEL
         // ==========================================
+
+        JLabel lblTitle =
+                createLabel("Item Title");
 
         txtTitle =
                 new JTextField(25);
 
         styleTextField(txtTitle);
 
-        addField(
-                cardPanel,
-                gbc,
-                0,
-                "Item Title",
-                txtTitle
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+
+        cardPanel.add(
+                lblTitle,
+                gbc
         );
 
-        // ==========================================
-        // MEMBER ID
-        // ==========================================
+        gbc.gridx = 1;
 
-        txtMemberId =
-                new JTextField(25);
-
-        styleTextField(txtMemberId);
-
-        addField(
-                cardPanel,
-                gbc,
-                1,
-                "Member ID",
-                txtMemberId
-        );
-
-        // ==========================================
-        // EMAIL
-        // ==========================================
-
-        txtEmail =
-                new JTextField(25);
-
-        styleTextField(txtEmail);
-
-        addField(
-                cardPanel,
-                gbc,
-                2,
-                "Member Email",
-                txtEmail
-        );
-
-        // ==========================================
-        // MEMBER TYPE
-        // ==========================================
-
-        comboType =
-                new JComboBox<>(
-                        new String[]{
-                                "Student",
-                                "Faculty"
-                        }
-                );
-
-        styleComboBox(comboType);
-
-        addField(
-                cardPanel,
-                gbc,
-                3,
-                "Member Type",
-                comboType
-        );
-
-        // ==========================================
-        // ISSUE DAY
-        // ==========================================
-
-        txtIssueDay =
-                new JTextField(25);
-
-        styleTextField(txtIssueDay);
-
-        addField(
-                cardPanel,
-                gbc,
-                4,
-                "Issue Day",
-                txtIssueDay
+        cardPanel.add(
+                txtTitle,
+                gbc
         );
 
         // ==========================================
@@ -297,25 +228,25 @@ public class IssueItemPanel extends JPanel {
 
         buttonPanel.setOpaque(false);
 
-        JButton btnIssue =
+        btnDelete =
                 new JButton(
-                        "Issue Item"
+                        "Delete Item"
                 );
 
-        JButton btnClear =
+        btnClear =
                 new JButton(
                         "Clear"
                 );
 
-        stylePrimaryButton(btnIssue);
+        styleDeleteButton(btnDelete);
 
         styleClearButton(btnClear);
 
-        buttonPanel.add(btnIssue);
+        buttonPanel.add(btnDelete);
         buttonPanel.add(btnClear);
 
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy = 1;
         gbc.gridwidth = 2;
 
         cardPanel.add(
@@ -329,22 +260,22 @@ public class IssueItemPanel extends JPanel {
         );
 
         // ==========================================
-        // INFORMATION CARD
+        // WARNING CARD
         // ==========================================
 
-        JPanel infoPanel =
+        JPanel warningPanel =
                 new JPanel(
                         new BorderLayout()
                 );
 
-        infoPanel.setBackground(
-                INFO_BG
+        warningPanel.setBackground(
+                WARNING_BG
         );
 
-        infoPanel.setBorder(
+        warningPanel.setBorder(
                 BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(
-                                new Color(199, 210, 254)
+                                new Color(254, 202, 202)
                         ),
                         new EmptyBorder(
                                 12,
@@ -355,19 +286,19 @@ public class IssueItemPanel extends JPanel {
                 )
         );
 
-        JLabel infoLabel =
+        JLabel warningLabel =
                 new JLabel(
                         "<html><center>"
-                                + "<b>Borrowing Rules</b>"
+                                + "<b>Warning:</b> Deleting an item "
+                                + "cannot be undone."
                                 + "<br>"
-                                + "Student: Maximum 3 items / 15 days"
-                                + "<br>"
-                                + "Faculty: Maximum 5 items / 30 days"
+                                + "An item cannot be deleted while "
+                                + "one of its copies is issued."
                                 + "</center></html>",
                         SwingConstants.CENTER
                 );
 
-        infoLabel.setFont(
+        warningLabel.setFont(
                 new Font(
                         "SansSerif",
                         Font.PLAIN,
@@ -375,27 +306,31 @@ public class IssueItemPanel extends JPanel {
                 )
         );
 
-        infoLabel.setForeground(
-                INFO_TEXT
+        warningLabel.setForeground(
+                new Color(153, 27, 27)
         );
 
-        infoPanel.add(
-                infoLabel,
+        warningPanel.add(
+                warningLabel,
                 BorderLayout.CENTER
         );
 
         add(
-                infoPanel,
+                warningPanel,
                 BorderLayout.SOUTH
         );
 
         // ==========================================
-        // BUTTON ACTIONS
+        // DELETE BUTTON
         // ==========================================
 
-        btnIssue.addActionListener(
-                e -> issueItem()
+        btnDelete.addActionListener(
+                e -> deleteItem()
         );
+
+        // ==========================================
+        // CLEAR BUTTON
+        // ==========================================
 
         btnClear.addActionListener(
                 e -> clearFields()
@@ -403,24 +338,16 @@ public class IssueItemPanel extends JPanel {
     }
 
     // ==================================================
-    // ADD FIELD
+    // CREATE LABEL
     // ==================================================
 
-    private void addField(
-            JPanel panel,
-            GridBagConstraints gbc,
-            int row,
-            String label,
-            JComponent component) {
+    private JLabel createLabel(
+            String text) {
 
-        gbc.gridx = 0;
-        gbc.gridy = row;
-        gbc.gridwidth = 1;
+        JLabel label =
+                new JLabel(text);
 
-        JLabel fieldLabel =
-                new JLabel(label);
-
-        fieldLabel.setFont(
+        label.setFont(
                 new Font(
                         "SansSerif",
                         Font.BOLD,
@@ -428,21 +355,11 @@ public class IssueItemPanel extends JPanel {
                 )
         );
 
-        fieldLabel.setForeground(
+        label.setForeground(
                 TEXT_COLOR
         );
 
-        panel.add(
-                fieldLabel,
-                gbc
-        );
-
-        gbc.gridx = 1;
-
-        panel.add(
-                component,
-                gbc
-        );
+        return label;
     }
 
     // ==================================================
@@ -484,40 +401,10 @@ public class IssueItemPanel extends JPanel {
     }
 
     // ==================================================
-    // COMBO BOX STYLE
+    // DELETE BUTTON STYLE
     // ==================================================
 
-    private void styleComboBox(
-            JComboBox<String> comboBox) {
-
-        comboBox.setFont(
-                new Font(
-                        "SansSerif",
-                        Font.PLAIN,
-                        14
-                )
-        );
-
-        comboBox.setForeground(
-                TEXT_COLOR
-        );
-
-        comboBox.setBackground(
-                new Color(248, 250, 252)
-        );
-
-        comboBox.setBorder(
-                BorderFactory.createLineBorder(
-                        new Color(203, 213, 225)
-                )
-        );
-    }
-
-    // ==================================================
-    // PRIMARY BUTTON STYLE
-    // ==================================================
-
-    private void stylePrimaryButton(
+    private void styleDeleteButton(
             JButton button) {
 
         button.setFont(
@@ -533,7 +420,7 @@ public class IssueItemPanel extends JPanel {
         );
 
         button.setBackground(
-                PRIMARY
+                DANGER
         );
 
         button.setFocusPainted(false);
@@ -561,7 +448,7 @@ public class IssueItemPanel extends JPanel {
                             java.awt.event.MouseEvent e) {
 
                         button.setBackground(
-                                PRIMARY_HOVER
+                                DANGER_HOVER
                         );
                     }
 
@@ -570,7 +457,7 @@ public class IssueItemPanel extends JPanel {
                             java.awt.event.MouseEvent e) {
 
                         button.setBackground(
-                                PRIMARY
+                                DANGER
                         );
                     }
                 }
@@ -619,118 +506,84 @@ public class IssueItemPanel extends JPanel {
     }
 
     // ==================================================
-    // ISSUE ITEM
+    // DELETE ITEM
     // ==================================================
 
-    private void issueItem() {
+    private void deleteItem() {
 
         try {
 
             String title =
                     txtTitle.getText().trim();
 
-            String memberId =
-                    txtMemberId.getText().trim();
-
-            String email =
-                    txtEmail.getText().trim();
-
-            String memberType =
-                    (String) comboType.getSelectedItem();
-
-            String issueDayText =
-                    txtIssueDay.getText().trim();
-
             // ==========================================
-            // BASIC VALIDATION
+            // INPUT VALIDATION
             // ==========================================
 
-            if (title.isEmpty()
-                    || memberId.isEmpty()
-                    || email.isEmpty()
-                    || issueDayText.isEmpty()) {
+            if (title.isEmpty()) {
 
                 JOptionPane.showMessageDialog(
                         this,
-                        "Please fill in all fields.",
+                        "Please enter the item title.",
                         "Input Error",
                         JOptionPane.WARNING_MESSAGE
                 );
 
+                txtTitle.requestFocus();
+
                 return;
             }
 
             // ==========================================
-            // ISSUE DAY VALIDATION
+            // CHECK WHETHER ITEM EXISTS
             // ==========================================
 
-            int issueDay;
+            if (libraryService.searchByTitle(title)
+                    == null) {
 
-            try {
-
-                issueDay =
-                        Integer.parseInt(
-                                issueDayText
-                        );
-
-            } catch (NumberFormatException ex) {
-
-                JOptionPane.showMessageDialog(
-                        this,
-                        "Issue Day must be a valid number.",
-                        "Input Error",
-                        JOptionPane.ERROR_MESSAGE
+                throw new ItemNotFoundException(
+                        "No item found with title: "
+                                + title
                 );
+            }
+
+            // ==========================================
+            // CONFIRMATION
+            // ==========================================
+
+            int confirmation =
+                    JOptionPane.showConfirmDialog(
+                            this,
+                            "Are you sure you want to delete:\n\n"
+                                    + "\"" + title + "\""
+                                    + "\n\nThis action cannot be undone.",
+                            "Confirm Deletion",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.WARNING_MESSAGE
+                    );
+
+            if (confirmation
+                    != JOptionPane.YES_OPTION) {
 
                 return;
             }
 
-            if (issueDay <= 0) {
-
-                JOptionPane.showMessageDialog(
-                        this,
-                        "Issue Day must be greater than 0.",
-                        "Input Error",
-                        JOptionPane.ERROR_MESSAGE
-                );
-
-                return;
-            }
-
             // ==========================================
-            // GET BORROWED COUNT
+            // DELETE THROUGH SERVICE
             // ==========================================
 
-            int currentBorrowed =
-                    libraryService
-                            .getBorrowedCountForMember(
-                                    memberId
-                            );
+            libraryService.removeItem(title);
 
             // ==========================================
-            // PROCESS ISSUE
-            // ==========================================
-
-            libraryService.processIssue(
-                    title,
-                    memberId,
-                    email,
-                    memberType,
-                    issueDay,
-                    currentBorrowed
-            );
-
-            // ==========================================
-            // SUCCESS
+            // SUCCESS MESSAGE
             // ==========================================
 
             JOptionPane.showMessageDialog(
                     this,
-                    "Item issued successfully!\n\n"
-                            + "Item: " + title
-                            + "\nMember ID: " + memberId
-                            + "\nMember Type: " + memberType,
-                    "Issue Successful",
+                    "Item deleted successfully!\n\n"
+                            + "Deleted Item: "
+                            + title,
+                    "Delete Successful",
                     JOptionPane.INFORMATION_MESSAGE
             );
 
@@ -745,21 +598,12 @@ public class IssueItemPanel extends JPanel {
                     JOptionPane.ERROR_MESSAGE
             );
 
-        } catch (MemberNotFoundException ex) {
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    ex.getMessage(),
-                    "Member Error",
-                    JOptionPane.ERROR_MESSAGE
-            );
-
         } catch (InvalidInputException ex) {
 
             JOptionPane.showMessageDialog(
                     this,
                     ex.getMessage(),
-                    "Invalid Input",
+                    "Cannot Delete Item",
                     JOptionPane.ERROR_MESSAGE
             );
 
@@ -776,17 +620,12 @@ public class IssueItemPanel extends JPanel {
     }
 
     // ==================================================
-    // CLEAR FIELDS
+    // CLEAR
     // ==================================================
 
     private void clearFields() {
 
         txtTitle.setText("");
-        txtMemberId.setText("");
-        txtEmail.setText("");
-        txtIssueDay.setText("");
-
-        comboType.setSelectedIndex(0);
 
         txtTitle.requestFocus();
     }

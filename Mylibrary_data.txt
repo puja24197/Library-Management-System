@@ -1,7 +1,13 @@
-BOOK,Java Programming,15,P. Rizwan Ahmed,false
-BOOK,Numerical Methods,8,Richard L. burden,false
-BOOK,Data Structures & Algorithms,31,Mark Allen Weiss,false
-BOOK,Data Communications and networking ,19,Behrouz a forouzan,false
-MAGAZINE,Kishore Alo,12,Prothom Alo,false
-MAGAZINE,Time Magazine,7,Time USA,false
-MAGAZINE,Canvas,21,Canvas Publications,false
+BOOK,Advanced Java,5,5,Herbert Schildt,false,N/A,N/A,0
+BOOK,Python Programming,5,5,Guido van Rossum,false,N/A,N/A,0
+BOOK,C++ Programming,4,4,Bjarne Stroustrup,false,N/A,N/A,0
+BOOK,Data Structures,6,6,Mark Allen Weiss,false,N/A,N/A,0
+BOOK,Java Programming,15,15,P. Rizwan Ahmed,false,N/A,N/A,0
+BOOK,Numerical Methods,8,8,Richard L. burden,false,N/A,N/A,0
+BOOK,Data Structures & Algorithms,31,31,Mark Allen Weiss,false,N/A,N/A,0
+BOOK,Data Communications and networking,19,19,Behrouz a forouzan,false,N/A,N/A,0
+MAGAZINE,Kishore Alo,12,12,Prothom Alo,false,N/A,N/A,0
+MAGAZINE,Time Magazine,7,7,Time USA,false,N/A,N/A,0
+MAGAZINE,Canvas,21,21,Canvas Publications,false,N/A,N/A,0
+MAGAZINE,Jingala Magazine,9999,9999,Mr. Jhandubam,false,N/A,N/A,0
+BOOK,101 Ways to Fail in Exam,11,11,Mr. Md CrowMan,false,N/A,N/A,0

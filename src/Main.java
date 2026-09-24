@@ -1,6 +1,9 @@
-import Exception.*;
-import Model.*;
-import Exception.*;
+import Exception.InvalidInputException;
+import Exception.ItemNotFoundException;
+import Exception.MemberNotFoundException;
+import Model.Book;
+import Model.LibraryItems;
+import Model.LibraryService;
 
 public class Main {
 
@@ -12,7 +15,10 @@ public class Main {
         System.out.println("       LIBRARY MANAGEMENT SYSTEM - TEST");
         System.out.println("================================================");
 
-        System.out.println("\n========== 1. ADDING 5 BOOKS ==========");
+        // =================================================
+        // 1. CREATE
+        // =================================================
+        System.out.println("\n========== 1. ADDING BOOKS ==========");
 
         try {
 
@@ -46,7 +52,6 @@ public class Main {
                     "Raghu Ramakrishnan"
             );
 
-
             libraryService.registerItem(book1);
             libraryService.registerItem(book2);
             libraryService.registerItem(book3);
@@ -55,15 +60,23 @@ public class Main {
 
             System.out.println("5 books added successfully!");
 
-        } catch (Exception e) {
-            System.out.println("Error while adding books: "
-                    + e.getMessage());
+        } catch (InvalidInputException e) {
+
+            System.out.println(
+                    "Invalid Input: " + e.getMessage()
+            );
         }
 
+        // =================================================
+        // 2. READ
+        // =================================================
         System.out.println("\n========== 2. SHOW CATALOG ==========");
 
         libraryService.showCatalog();
 
+        // =================================================
+        // 3. SEARCH
+        // =================================================
         System.out.println("\n========== 3. SEARCH TEST ==========");
 
         LibraryItems found =
@@ -78,7 +91,8 @@ public class Main {
             );
 
             System.out.println(
-                    "Total Copies: " + found.getTotalCopies()
+                    "Total Copies: "
+                            + found.getTotalCopies()
             );
 
             System.out.println(
@@ -91,8 +105,12 @@ public class Main {
             System.out.println("Book not found!");
         }
 
-
-        System.out.println("\n========== 4. UPDATE BOOK TEST ==========");
+        // =================================================
+        // 4. UPDATE
+        // =================================================
+        System.out.println(
+                "\n========== 4. UPDATE BOOK TEST =========="
+        );
 
         try {
 
@@ -107,20 +125,97 @@ public class Main {
                     "Update completed successfully!"
             );
 
-        } catch (Exception e) {
+        } catch (ItemNotFoundException e) {
 
             System.out.println(
-                    "Update failed: " + e.getMessage()
+                    "Item Not Found: " + e.getMessage()
+            );
+
+        } catch (InvalidInputException e) {
+
+            System.out.println(
+                    "Invalid Input: " + e.getMessage()
             );
         }
 
+        // =================================================
+        // 5. ISSUE
+        // =================================================
         System.out.println(
-                "\n========== 5. CATALOG AFTER UPDATE =========="
+                "\n========== 5. ISSUE BOOK TEST =========="
         );
 
-        libraryService.showCatalog();
+        try {
 
-        System.out.println("\n========== 6. DELETE BOOK TEST ==========");
+            libraryService.processIssue(
+                    "Advanced Java",
+                    "M001",
+                    "student@gmail.com",
+                    "Student",
+                    10,
+                    0
+            );
+
+            System.out.println(
+                    "Issue operation completed successfully!"
+            );
+
+        } catch (ItemNotFoundException e) {
+
+            System.out.println(
+                    "Item Not Found: " + e.getMessage()
+            );
+
+        } catch (MemberNotFoundException e) {
+
+            System.out.println(
+                    "Member Not Found: " + e.getMessage()
+            );
+
+        } catch (InvalidInputException e) {
+
+            System.out.println(
+                    "Invalid Input: " + e.getMessage()
+            );
+        }
+
+        // =================================================
+        // 6. RETURN
+        // =================================================
+        System.out.println(
+                "\n========== 6. RETURN BOOK TEST =========="
+        );
+
+        try {
+
+            libraryService.returnItem(
+                    "Advanced Java",
+                    20
+            );
+
+            System.out.println(
+                    "Return operation completed successfully!"
+            );
+
+        } catch (ItemNotFoundException e) {
+
+            System.out.println(
+                    "Item Not Found: " + e.getMessage()
+            );
+
+        } catch (InvalidInputException e) {
+
+            System.out.println(
+                    "Invalid Input: " + e.getMessage()
+            );
+        }
+
+        // =================================================
+        // 7. DELETE
+        // =================================================
+        System.out.println(
+                "\n========== 7. DELETE BOOK TEST =========="
+        );
 
         try {
 
@@ -132,19 +227,22 @@ public class Main {
                     "Database Systems deleted successfully!"
             );
 
-        } catch (Exception e) {
+        } catch (ItemNotFoundException e) {
 
             System.out.println(
-                    "Delete failed: " + e.getMessage()
+                    "Item Not Found: " + e.getMessage()
+            );
+
+        } catch (InvalidInputException e) {
+
+            System.out.println(
+                    "Invalid Input: " + e.getMessage()
             );
         }
 
-        System.out.println(
-                "\n========== 7. CATALOG AFTER DELETE =========="
-        );
-
-        libraryService.showCatalog();
-
+        // =================================================
+        // 8. DUPLICATE TEST
+        // =================================================
         System.out.println(
                 "\n========== 8. DUPLICATE BOOK TEST =========="
         );
@@ -161,7 +259,7 @@ public class Main {
                     duplicateBook
             );
 
-        } catch (Exception e) {
+        } catch (InvalidInputException e) {
 
             System.out.println(
                     "Expected Exception Caught: "
@@ -169,6 +267,9 @@ public class Main {
             );
         }
 
+        // =================================================
+        // 9. INVALID INPUT TEST
+        // =================================================
         System.out.println(
                 "\n========== 9. INVALID BOOK TEST =========="
         );
@@ -185,7 +286,7 @@ public class Main {
                     invalidBook
             );
 
-        } catch (Exception e) {
+        } catch (InvalidInputException e) {
 
             System.out.println(
                     "Expected Exception Caught: "
@@ -193,7 +294,9 @@ public class Main {
             );
         }
 
-
+        // =================================================
+        // 10. NULL ITEM TEST
+        // =================================================
         System.out.println(
                 "\n========== 10. NULL ITEM TEST =========="
         );
@@ -202,7 +305,7 @@ public class Main {
 
             libraryService.registerItem(null);
 
-        } catch (Exception e) {
+        } catch (InvalidInputException e) {
 
             System.out.println(
                     "Expected Exception Caught: "
@@ -210,6 +313,9 @@ public class Main {
             );
         }
 
+        // =================================================
+        // 11. SEARCH NON-EXISTING ITEM
+        // =================================================
         System.out.println(
                 "\n========== 11. SEARCH NON-EXISTING BOOK =========="
         );
@@ -232,7 +338,9 @@ public class Main {
             );
         }
 
-
+        // =================================================
+        // 12. FINAL CATALOG
+        // =================================================
         System.out.println(
                 "\n========== 12. FINAL CATALOG =========="
         );
@@ -247,5 +355,8 @@ public class Main {
                 "             ALL TESTS COMPLETED"
         );
 
+        System.out.println(
+                "================================================"
+        );
     }
 }

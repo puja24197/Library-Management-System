@@ -2,23 +2,29 @@ package LibraryGUI;
 
 import Exception.InvalidInputException;
 import Exception.ItemNotFoundException;
-import Exception.MemberNotFoundException;
 import Model.LibraryService;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class IssueItemPanel extends JPanel {
+public class UpdateItemPanel extends JPanel {
 
     private LibraryService libraryService;
 
-    private JTextField txtTitle;
-    private JTextField txtMemberId;
-    private JTextField txtEmail;
-    private JTextField txtIssueDay;
+    private JComboBox<String> comboItemType;
 
-    private JComboBox<String> comboType;
+    private JTextField txtOldTitle;
+    private JTextField txtNewTitle;
+    private JTextField txtTotalCopies;
+    private JTextField txtAuthor;
+    private JTextField txtPublisher;
+
+    private JLabel lblAuthor;
+    private JLabel lblPublisher;
+
+    private JButton btnUpdate;
+    private JButton btnClear;
 
     // ==========================================
     // COLORS
@@ -51,7 +57,7 @@ public class IssueItemPanel extends JPanel {
     private final Color INFO_TEXT =
             new Color(55, 48, 163);
 
-    public IssueItemPanel(LibraryService service) {
+    public UpdateItemPanel(LibraryService service) {
 
         this.libraryService = service;
 
@@ -90,7 +96,7 @@ public class IssueItemPanel extends JPanel {
 
         JLabel titleLabel =
                 new JLabel(
-                        "Issue Library Item",
+                        "Update Library Item",
                         SwingConstants.CENTER
                 );
 
@@ -112,7 +118,7 @@ public class IssueItemPanel extends JPanel {
 
         JLabel subtitleLabel =
                 new JLabel(
-                        "Issue a book or magazine to a library member",
+                        "Edit the information of an existing library item",
                         SwingConstants.CENTER
                 );
 
@@ -168,9 +174,9 @@ public class IssueItemPanel extends JPanel {
                                 new Color(226, 232, 240)
                         ),
                         new EmptyBorder(
-                                20,
+                                15,
                                 30,
-                                20,
+                                15,
                                 30
                         )
                 )
@@ -181,9 +187,9 @@ public class IssueItemPanel extends JPanel {
 
         gbc.insets =
                 new Insets(
-                        7,
+                        5,
                         10,
-                        7,
+                        5,
                         10
                 );
 
@@ -193,94 +199,121 @@ public class IssueItemPanel extends JPanel {
         gbc.weightx = 1.0;
 
         // ==========================================
-        // ITEM TITLE
+        // ITEM TYPE
         // ==========================================
 
-        txtTitle =
-                new JTextField(25);
+        comboItemType =
+                new JComboBox<>(
+                        new String[]{
+                                "Book",
+                                "Magazine"
+                        }
+                );
 
-        styleTextField(txtTitle);
+        styleComboBox(comboItemType);
 
         addField(
                 cardPanel,
                 gbc,
                 0,
-                "Item Title",
-                txtTitle
+                "Item Type",
+                comboItemType
         );
 
         // ==========================================
-        // MEMBER ID
+        // CURRENT TITLE
         // ==========================================
 
-        txtMemberId =
+        txtOldTitle =
                 new JTextField(25);
 
-        styleTextField(txtMemberId);
+        styleTextField(txtOldTitle);
 
         addField(
                 cardPanel,
                 gbc,
                 1,
-                "Member ID",
-                txtMemberId
+                "Current Title",
+                txtOldTitle
         );
 
         // ==========================================
-        // EMAIL
+        // NEW TITLE
         // ==========================================
 
-        txtEmail =
+        txtNewTitle =
                 new JTextField(25);
 
-        styleTextField(txtEmail);
+        styleTextField(txtNewTitle);
 
         addField(
                 cardPanel,
                 gbc,
                 2,
-                "Member Email",
-                txtEmail
+                "New Title",
+                txtNewTitle
         );
 
         // ==========================================
-        // MEMBER TYPE
+        // TOTAL COPIES
         // ==========================================
 
-        comboType =
-                new JComboBox<>(
-                        new String[]{
-                                "Student",
-                                "Faculty"
-                        }
-                );
+        txtTotalCopies =
+                new JTextField(25);
 
-        styleComboBox(comboType);
+        styleTextField(txtTotalCopies);
 
         addField(
                 cardPanel,
                 gbc,
                 3,
-                "Member Type",
-                comboType
+                "New Total Copies",
+                txtTotalCopies
         );
 
         // ==========================================
-        // ISSUE DAY
+        // AUTHOR
         // ==========================================
 
-        txtIssueDay =
+        lblAuthor =
+                createLabel("New Author");
+
+        txtAuthor =
                 new JTextField(25);
 
-        styleTextField(txtIssueDay);
+        styleTextField(txtAuthor);
 
         addField(
                 cardPanel,
                 gbc,
                 4,
-                "Issue Day",
-                txtIssueDay
+                lblAuthor,
+                txtAuthor
         );
+
+        // ==========================================
+        // PUBLISHER
+        // ==========================================
+
+        lblPublisher =
+                createLabel("New Publisher");
+
+        txtPublisher =
+                new JTextField(25);
+
+        styleTextField(txtPublisher);
+
+        addField(
+                cardPanel,
+                gbc,
+                5,
+                lblPublisher,
+                txtPublisher
+        );
+
+        // Initially Book selected
+        lblPublisher.setVisible(false);
+        txtPublisher.setVisible(false);
 
         // ==========================================
         // BUTTONS
@@ -291,31 +324,31 @@ public class IssueItemPanel extends JPanel {
                         new FlowLayout(
                                 FlowLayout.CENTER,
                                 15,
-                                10
+                                8
                         )
                 );
 
         buttonPanel.setOpaque(false);
 
-        JButton btnIssue =
+        btnUpdate =
                 new JButton(
-                        "Issue Item"
+                        "Update Item"
                 );
 
-        JButton btnClear =
+        btnClear =
                 new JButton(
                         "Clear"
                 );
 
-        stylePrimaryButton(btnIssue);
+        stylePrimaryButton(btnUpdate);
 
         styleClearButton(btnClear);
 
-        buttonPanel.add(btnIssue);
+        buttonPanel.add(btnUpdate);
         buttonPanel.add(btnClear);
 
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy = 6;
         gbc.gridwidth = 2;
 
         cardPanel.add(
@@ -347,9 +380,9 @@ public class IssueItemPanel extends JPanel {
                                 new Color(199, 210, 254)
                         ),
                         new EmptyBorder(
-                                12,
+                                10,
                                 15,
-                                12,
+                                10,
                                 15
                         )
                 )
@@ -358,11 +391,11 @@ public class IssueItemPanel extends JPanel {
         JLabel infoLabel =
                 new JLabel(
                         "<html><center>"
-                                + "<b>Borrowing Rules</b>"
+                                + "<b>Update Information</b>"
                                 + "<br>"
-                                + "Student: Maximum 3 items / 15 days"
+                                + "Enter the current title and the new information."
                                 + "<br>"
-                                + "Faculty: Maximum 5 items / 30 days"
+                                + "The updated record will be saved automatically."
                                 + "</center></html>",
                         SwingConstants.CENTER
                 );
@@ -390,16 +423,53 @@ public class IssueItemPanel extends JPanel {
         );
 
         // ==========================================
-        // BUTTON ACTIONS
+        // ITEM TYPE CHANGE
         // ==========================================
 
-        btnIssue.addActionListener(
-                e -> issueItem()
+        comboItemType.addActionListener(
+                e -> updateItemTypeFields()
         );
+
+        // ==========================================
+        // UPDATE BUTTON
+        // ==========================================
+
+        btnUpdate.addActionListener(
+                e -> updateItem()
+        );
+
+        // ==========================================
+        // CLEAR BUTTON
+        // ==========================================
 
         btnClear.addActionListener(
                 e -> clearFields()
         );
+    }
+
+    // ==================================================
+    // CREATE LABEL
+    // ==================================================
+
+    private JLabel createLabel(
+            String text) {
+
+        JLabel label =
+                new JLabel(text);
+
+        label.setFont(
+                new Font(
+                        "SansSerif",
+                        Font.BOLD,
+                        14
+                )
+        );
+
+        label.setForeground(
+                TEXT_COLOR
+        );
+
+        return label;
     }
 
     // ==================================================
@@ -413,27 +483,28 @@ public class IssueItemPanel extends JPanel {
             String label,
             JComponent component) {
 
+        addField(
+                panel,
+                gbc,
+                row,
+                createLabel(label),
+                component
+        );
+    }
+
+    private void addField(
+            JPanel panel,
+            GridBagConstraints gbc,
+            int row,
+            JLabel label,
+            JComponent component) {
+
         gbc.gridx = 0;
         gbc.gridy = row;
         gbc.gridwidth = 1;
 
-        JLabel fieldLabel =
-                new JLabel(label);
-
-        fieldLabel.setFont(
-                new Font(
-                        "SansSerif",
-                        Font.BOLD,
-                        14
-                )
-        );
-
-        fieldLabel.setForeground(
-                TEXT_COLOR
-        );
-
         panel.add(
-                fieldLabel,
+                label,
                 gbc
         );
 
@@ -619,120 +690,249 @@ public class IssueItemPanel extends JPanel {
     }
 
     // ==================================================
-    // ISSUE ITEM
+    // SHOW/HIDE BOOK OR MAGAZINE FIELDS
     // ==================================================
 
-    private void issueItem() {
+    private void updateItemTypeFields() {
+
+        String selectedType =
+                (String) comboItemType.getSelectedItem();
+
+        boolean isBook =
+                "Book".equals(selectedType);
+
+        lblAuthor.setVisible(isBook);
+        txtAuthor.setVisible(isBook);
+
+        lblPublisher.setVisible(!isBook);
+        txtPublisher.setVisible(!isBook);
+
+        revalidate();
+        repaint();
+    }
+
+    // ==================================================
+    // UPDATE ITEM
+    // ==================================================
+
+    private void updateItem() {
 
         try {
 
-            String title =
-                    txtTitle.getText().trim();
-
-            String memberId =
-                    txtMemberId.getText().trim();
-
-            String email =
-                    txtEmail.getText().trim();
-
-            String memberType =
-                    (String) comboType.getSelectedItem();
-
-            String issueDayText =
-                    txtIssueDay.getText().trim();
-
             // ==========================================
-            // BASIC VALIDATION
+            // GET INPUT
             // ==========================================
 
-            if (title.isEmpty()
-                    || memberId.isEmpty()
-                    || email.isEmpty()
-                    || issueDayText.isEmpty()) {
+            String type =
+                    (String) comboItemType.getSelectedItem();
+
+            String oldTitle =
+                    txtOldTitle.getText().trim();
+
+            String newTitle =
+                    txtNewTitle.getText().trim();
+
+            String copiesText =
+                    txtTotalCopies.getText().trim();
+
+            // ==========================================
+            // VALIDATE CURRENT TITLE
+            // ==========================================
+
+            if (oldTitle.isEmpty()) {
 
                 JOptionPane.showMessageDialog(
                         this,
-                        "Please fill in all fields.",
+                        "Please enter the current item title.",
                         "Input Error",
                         JOptionPane.WARNING_MESSAGE
                 );
+
+                txtOldTitle.requestFocus();
 
                 return;
             }
 
             // ==========================================
-            // ISSUE DAY VALIDATION
+            // VALIDATE NEW TITLE
             // ==========================================
 
-            int issueDay;
+            if (newTitle.isEmpty()) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "New title cannot be empty.",
+                        "Input Error",
+                        JOptionPane.WARNING_MESSAGE
+                );
+
+                txtNewTitle.requestFocus();
+
+                return;
+            }
+
+            // ==========================================
+            // VALIDATE COPIES
+            // ==========================================
+
+            if (copiesText.isEmpty()) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Please enter the new total number of copies.",
+                        "Input Error",
+                        JOptionPane.WARNING_MESSAGE
+                );
+
+                txtTotalCopies.requestFocus();
+
+                return;
+            }
+
+            int newTotalCopies;
 
             try {
 
-                issueDay =
+                newTotalCopies =
                         Integer.parseInt(
-                                issueDayText
+                                copiesText
                         );
 
             } catch (NumberFormatException ex) {
 
                 JOptionPane.showMessageDialog(
                         this,
-                        "Issue Day must be a valid number.",
+                        "Total Copies must be a valid number.",
                         "Input Error",
                         JOptionPane.ERROR_MESSAGE
                 );
 
+                txtTotalCopies.requestFocus();
+
                 return;
             }
 
-            if (issueDay <= 0) {
+            if (newTotalCopies <= 0) {
 
                 JOptionPane.showMessageDialog(
                         this,
-                        "Issue Day must be greater than 0.",
+                        "Total Copies must be greater than 0.",
                         "Input Error",
                         JOptionPane.ERROR_MESSAGE
                 );
+
+                txtTotalCopies.requestFocus();
 
                 return;
             }
 
             // ==========================================
-            // GET BORROWED COUNT
+            // CHECK WHETHER ITEM EXISTS
             // ==========================================
 
-            int currentBorrowed =
-                    libraryService
-                            .getBorrowedCountForMember(
-                                    memberId
-                            );
+            if (libraryService.searchByTitle(oldTitle)
+                    == null) {
+
+                throw new ItemNotFoundException(
+                        "No item found with title: "
+                                + oldTitle
+                );
+            }
 
             // ==========================================
-            // PROCESS ISSUE
+            // UPDATE BOOK
             // ==========================================
 
-            libraryService.processIssue(
-                    title,
-                    memberId,
-                    email,
-                    memberType,
-                    issueDay,
-                    currentBorrowed
-            );
+            if ("Book".equals(type)) {
+
+                String author =
+                        txtAuthor.getText().trim();
+
+                if (author.isEmpty()) {
+
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "Author cannot be empty.",
+                            "Input Error",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+
+                    txtAuthor.requestFocus();
+
+                    return;
+                }
+
+                libraryService.updateBook(
+                        oldTitle,
+                        newTitle,
+                        newTotalCopies,
+                        author
+                );
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Book updated successfully!\n\n"
+                                + "Old Title: "
+                                + oldTitle
+                                + "\nNew Title: "
+                                + newTitle
+                                + "\nTotal Copies: "
+                                + newTotalCopies
+                                + "\nAuthor: "
+                                + author,
+                        "Update Successful",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+
+            } else {
+
+                // ==========================================
+                // UPDATE MAGAZINE
+                // ==========================================
+
+                String publisher =
+                        txtPublisher.getText().trim();
+
+                if (publisher.isEmpty()) {
+
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "Publisher cannot be empty.",
+                            "Input Error",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+
+                    txtPublisher.requestFocus();
+
+                    return;
+                }
+
+                libraryService.updateMagazine(
+                        oldTitle,
+                        newTitle,
+                        newTotalCopies,
+                        publisher
+                );
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Magazine updated successfully!\n\n"
+                                + "Old Title: "
+                                + oldTitle
+                                + "\nNew Title: "
+                                + newTitle
+                                + "\nTotal Copies: "
+                                + newTotalCopies
+                                + "\nPublisher: "
+                                + publisher,
+                        "Update Successful",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+            }
 
             // ==========================================
-            // SUCCESS
+            // CLEAR AFTER SUCCESS
             // ==========================================
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Item issued successfully!\n\n"
-                            + "Item: " + title
-                            + "\nMember ID: " + memberId
-                            + "\nMember Type: " + memberType,
-                    "Issue Successful",
-                    JOptionPane.INFORMATION_MESSAGE
-            );
 
             clearFields();
 
@@ -745,21 +945,12 @@ public class IssueItemPanel extends JPanel {
                     JOptionPane.ERROR_MESSAGE
             );
 
-        } catch (MemberNotFoundException ex) {
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    ex.getMessage(),
-                    "Member Error",
-                    JOptionPane.ERROR_MESSAGE
-            );
-
         } catch (InvalidInputException ex) {
 
             JOptionPane.showMessageDialog(
                     this,
                     ex.getMessage(),
-                    "Invalid Input",
+                    "Update Error",
                     JOptionPane.ERROR_MESSAGE
             );
 
@@ -776,18 +967,21 @@ public class IssueItemPanel extends JPanel {
     }
 
     // ==================================================
-    // CLEAR FIELDS
+    // CLEAR
     // ==================================================
 
     private void clearFields() {
 
-        txtTitle.setText("");
-        txtMemberId.setText("");
-        txtEmail.setText("");
-        txtIssueDay.setText("");
+        comboItemType.setSelectedIndex(0);
 
-        comboType.setSelectedIndex(0);
+        txtOldTitle.setText("");
+        txtNewTitle.setText("");
+        txtTotalCopies.setText("");
+        txtAuthor.setText("");
+        txtPublisher.setText("");
 
-        txtTitle.requestFocus();
+        updateItemTypeFields();
+
+        txtOldTitle.requestFocus();
     }
 }
