@@ -1,3 +1,7 @@
-BOOK,Advanced Java,5,Herbert Schildt,false
-BOOK,Python Programming,7,Pagol,false
-BOOK,Java Basics,3,James Gosling,false
+BOOK,Java Programming,15,P. Rizwan Ahmed,false
+BOOK,Numerical Methods,8,Richard L. burden,false
+BOOK,Data Structures & Algorithms,31,Mark Allen Weiss,false
+BOOK,Data Communications and networking ,19,Behrouz a forouzan,false
+MAGAZINE,Kishore Alo,12,Prothom Alo,false
+MAGAZINE,Time Magazine,7,Time USA,false
+MAGAZINE,Canvas,21,Canvas Publications,false

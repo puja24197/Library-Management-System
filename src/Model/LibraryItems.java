@@ -82,6 +82,7 @@ public abstract class LibraryItems {
         }
     }
 
+
     public String getTitle() {
         return title;
     }

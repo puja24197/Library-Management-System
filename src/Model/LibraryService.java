@@ -35,6 +35,17 @@ public class LibraryService {
         FileManager.saveData(catalog);
         System.out.println("Success: Record added and synchronized to file.");
     }
+    public int getBorrowedCountForMember(String memberId) {
+        int count = 0;
+        if (catalog == null) return count;
+
+        for (LibraryItems item : catalog) {
+            if (item.getMemberId() != null && item.getMemberId().equalsIgnoreCase(memberId)) {
+                count++;
+            }
+        }
+        return count;
+    }
 
     public void showCatalog() {
         if (catalog.isEmpty()) {
@@ -227,5 +238,19 @@ public class LibraryService {
         FileManager.saveData(catalog);
 
         System.out.println("Success: Magazine updated and file updated.");
+    }
+    public void returnItem(String title) throws ItemNotFoundException, InvalidInputException{
+        LibraryItems target = searchByTitle(title);
+
+        if (target == null){
+            throw new ItemNotFoundException("Return Error: Item titled '" + title + "' was not found.");
+        }
+        if (target.getAvailableCopies() < target.getTotalCopies()) {
+            target.setAvailableCopies(target.getAvailableCopies() + 1);
+            FileManager.saveData(catalog);
+            System.out.println("Success: Item returned successfully.");
+        } else {
+            throw new InvalidInputException("All copies of '" + title + "' are already in the library!");
+        }
     }
 }
