@@ -21,44 +21,28 @@ public class ViewCategoryPanel extends JPanel {
     private DefaultTableModel tableModel;
     private JButton btnRefresh;
 
-    // ==================================================
-    // COLORS
-    // ==================================================
 
-    private final Color BACKGROUND =
-            new Color(245, 247, 252);
+    private final Color BACKGROUND = new Color(245, 247, 252);
 
-    private final Color CARD_COLOR =
-            Color.WHITE;
+    private final Color CARD_COLOR = Color.WHITE;
 
-    private final Color PRIMARY =
-            new Color(79, 70, 229);
+    private final Color PRIMARY = new Color(79, 70, 229);
 
-    private final Color PRIMARY_HOVER =
-            new Color(67, 56, 202);
+    private final Color PRIMARY_HOVER = new Color(67, 56, 202);
 
-    private final Color TEXT_COLOR =
-            new Color(31, 41, 55);
+    private final Color TEXT_COLOR = new Color(31, 41, 55);
 
     private final Color SUBTITLE_COLOR =
             new Color(100, 116, 139);
+    private final Color HEADER_COLOR = new Color(79, 70, 229);
 
-    private final Color HEADER_COLOR =
-            new Color(67, 56, 202);
+    private final Color INFO_BG = new Color(238, 242, 255);
 
-    private final Color INFO_BG =
-            new Color(238, 242, 255);
-
-    private final Color INFO_TEXT =
-            new Color(55, 48, 163);
+    private final Color INFO_TEXT = new Color(55, 48, 163);
 
     public ViewCategoryPanel(LibraryService service) {
 
         this.libraryService = service;
-
-        // ==================================================
-        // MAIN PANEL
-        // ==================================================
 
         setLayout(new BorderLayout());
 
@@ -73,61 +57,26 @@ public class ViewCategoryPanel extends JPanel {
                 )
         );
 
-        // ==================================================
-        // HEADER
-        // ==================================================
+        JPanel headerPanel = new JPanel();
 
-        JPanel headerPanel =
-                new JPanel();
-
-        headerPanel.setLayout(
-                new BoxLayout(
-                        headerPanel,
-                        BoxLayout.Y_AXIS
-                )
+        headerPanel.setLayout(new BoxLayout(headerPanel, BoxLayout.Y_AXIS)
         );
 
         headerPanel.setOpaque(false);
 
-        JLabel titleLabel =
-                new JLabel(
-                        "View Library by Category",
-                        SwingConstants.CENTER
-                );
+        JLabel titleLabel = new JLabel("View Library by Category", SwingConstants.CENTER);
 
-        titleLabel.setAlignmentX(
-                Component.CENTER_ALIGNMENT
-        );
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        titleLabel.setFont(
-                new Font(
-                        "SansSerif",
-                        Font.BOLD,
-                        26
-                )
-        );
+        titleLabel.setFont(new Font("SansSerif", Font.BOLD, 26));
 
-        titleLabel.setForeground(
-                PRIMARY
-        );
+        titleLabel.setForeground(PRIMARY);
 
-        JLabel subtitleLabel =
-                new JLabel(
-                        "Filter library items by Books or Magazines",
-                        SwingConstants.CENTER
-                );
+        JLabel subtitleLabel = new JLabel("Filter library items by Books or Magazines", SwingConstants.CENTER);
 
-        subtitleLabel.setAlignmentX(
-                Component.CENTER_ALIGNMENT
-        );
+        subtitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        subtitleLabel.setFont(
-                new Font(
-                        "SansSerif",
-                        Font.PLAIN,
-                        14
-                )
-        );
+        subtitleLabel.setFont(new Font("SansSerif", Font.PLAIN, 14));
 
         subtitleLabel.setForeground(
                 SUBTITLE_COLOR
@@ -135,45 +84,25 @@ public class ViewCategoryPanel extends JPanel {
 
         headerPanel.add(titleLabel);
 
-        headerPanel.add(
-                Box.createVerticalStrut(5)
-        );
+        headerPanel.add(Box.createVerticalStrut(5));
 
         headerPanel.add(subtitleLabel);
 
-        headerPanel.add(
-                Box.createVerticalStrut(15)
-        );
+        headerPanel.add(Box.createVerticalStrut(15));
 
         add(
                 headerPanel,
                 BorderLayout.NORTH
         );
 
-        // ==================================================
-        // CONTROL CARD
-        // ==================================================
+        JPanel controlCard = new JPanel(new FlowLayout(FlowLayout.CENTER, 12, 10));
 
-        JPanel controlCard =
-                new JPanel(
-                        new FlowLayout(
-                                FlowLayout.CENTER,
-                                12,
-                                10
-                        )
-                );
-
-        controlCard.setBackground(
-                CARD_COLOR
-        );
+        controlCard.setBackground(CARD_COLOR);
 
         controlCard.setBorder(
                 BorderFactory.createCompoundBorder(
-                        BorderFactory.createLineBorder(
-                                new Color(226, 232, 240)
-                        ),
-                        new EmptyBorder(
-                                5,
+                        BorderFactory.createLineBorder(new Color(226, 232, 240)),
+                        new EmptyBorder(5,
                                 15,
                                 5,
                                 15
@@ -181,24 +110,18 @@ public class ViewCategoryPanel extends JPanel {
                 )
         );
 
-        JLabel categoryLabel =
-                new JLabel("View Category:");
+        JLabel categoryLabel = new JLabel("View Category:");
 
-        categoryLabel.setFont(
-                new Font(
+        categoryLabel.setFont(new Font(
                         "SansSerif",
                         Font.BOLD,
                         14
                 )
         );
 
-        categoryLabel.setForeground(
-                TEXT_COLOR
-        );
+        categoryLabel.setForeground(TEXT_COLOR);
 
-        comboCategory =
-                new JComboBox<>(
-                        new String[]{
+        comboCategory = new JComboBox<>(new String[]{
                                 "All Items",
                                 "Books",
                                 "Magazines"
@@ -207,27 +130,18 @@ public class ViewCategoryPanel extends JPanel {
 
         styleComboBox(comboCategory);
 
-        btnRefresh =
-                new JButton("Refresh");
+        btnRefresh = new JButton("Refresh");
 
         styleRefreshButton(btnRefresh);
 
-        controlCard.add(
-                categoryLabel
+        controlCard.add(categoryLabel
         );
 
-        controlCard.add(
-                comboCategory
+        controlCard.add(comboCategory
         );
 
-        controlCard.add(
-                btnRefresh
+        controlCard.add(btnRefresh
         );
-
-        // ==================================================
-        // TABLE MODEL
-        // ==================================================
-
         tableModel =
                 new DefaultTableModel(
                         new String[]{
@@ -250,10 +164,6 @@ public class ViewCategoryPanel extends JPanel {
                         return false;
                     }
                 };
-
-        // ==================================================
-        // TABLE
-        // ==================================================
 
         table =
                 new JTable(tableModel);
@@ -293,41 +203,24 @@ public class ViewCategoryPanel extends JPanel {
         );
 
         table.setAutoCreateRowSorter(true);
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                label.setBackground(HEADER_COLOR);
+                label.setForeground(Color.WHITE); // White bold text
+                label.setFont(new Font("SansSerif", Font.BOLD, 13));
+                label.setHorizontalAlignment(SwingConstants.CENTER);
+                label.setOpaque(true);
+                return label;
+            }
+        };
 
-        // ==================================================
-        // TABLE HEADER
-        // ==================================================
+        for (int i = 0; i < table.getColumnCount(); i++) {
+            table.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+        }
 
-        table.getTableHeader()
-                .setFont(
-                        new Font(
-                                "SansSerif",
-                                Font.BOLD,
-                                13
-                        )
-                );
-
-        table.getTableHeader()
-                .setForeground(
-                        Color.WHITE
-                );
-
-        table.getTableHeader()
-                .setBackground(
-                        HEADER_COLOR
-                );
-
-        table.getTableHeader()
-                .setPreferredSize(
-                        new Dimension(
-                                0,
-                                38
-                        )
-                );
-
-        // ==================================================
-        // CENTER ALIGNMENT
-        // ==================================================
+        table.getTableHeader().setPreferredSize(new Dimension(0, 38));
 
         DefaultTableCellRenderer centerRenderer =
                 new DefaultTableCellRenderer();
@@ -336,44 +229,33 @@ public class ViewCategoryPanel extends JPanel {
                 SwingConstants.CENTER
         );
 
-        // Type
         table.getColumnModel()
                 .getColumn(0)
                 .setCellRenderer(
                         centerRenderer
                 );
 
-        // Total Copies
         table.getColumnModel()
                 .getColumn(3)
                 .setCellRenderer(
                         centerRenderer
                 );
 
-        // Available Copies
         table.getColumnModel()
                 .getColumn(4)
                 .setCellRenderer(
                         centerRenderer
                 );
-
-        // Status
         table.getColumnModel()
                 .getColumn(5)
                 .setCellRenderer(
                         centerRenderer
                 );
-
-        // Member ID
         table.getColumnModel()
                 .getColumn(6)
                 .setCellRenderer(
                         centerRenderer
                 );
-
-        // ==================================================
-        // COLUMN WIDTH
-        // ==================================================
 
         table.getColumnModel()
                 .getColumn(0)
@@ -403,16 +285,11 @@ public class ViewCategoryPanel extends JPanel {
                 .getColumn(6)
                 .setPreferredWidth(110);
 
-        // ==================================================
-        // SCROLL PANE
-        // ==================================================
-
         JScrollPane scrollPane =
                 new JScrollPane(table);
 
         scrollPane.setBorder(
-                BorderFactory.createLineBorder(
-                        new Color(226, 232, 240)
+                BorderFactory.createLineBorder(new Color(226, 232, 240)
                 )
         );
 
@@ -421,18 +298,9 @@ public class ViewCategoryPanel extends JPanel {
                         Color.WHITE
                 );
 
-        // ==================================================
-        // TABLE CARD
-        // ==================================================
+        JPanel tableCard = new JPanel(new BorderLayout());
 
-        JPanel tableCard =
-                new JPanel(
-                        new BorderLayout()
-                );
-
-        tableCard.setBackground(
-                CARD_COLOR
-        );
+        tableCard.setBackground(CARD_COLOR);
 
         tableCard.setBorder(
                 BorderFactory.createCompoundBorder(
@@ -453,13 +321,7 @@ public class ViewCategoryPanel extends JPanel {
                 BorderLayout.CENTER
         );
 
-        // ==================================================
-        // CENTER AREA
-        // ==================================================
-
-        JPanel centerPanel =
-                new JPanel(
-                        new BorderLayout(
+        JPanel centerPanel = new JPanel(new BorderLayout(
                                 0,
                                 12
                         )
@@ -467,32 +329,18 @@ public class ViewCategoryPanel extends JPanel {
 
         centerPanel.setOpaque(false);
 
-        centerPanel.add(
-                controlCard,
-                BorderLayout.NORTH
-        );
+        centerPanel.add(controlCard, BorderLayout.NORTH);
 
-        centerPanel.add(
-                tableCard,
-                BorderLayout.CENTER
-        );
+        centerPanel.add(tableCard, BorderLayout.CENTER);
 
         add(
                 centerPanel,
                 BorderLayout.CENTER
         );
 
-        // ==================================================
-        // INFORMATION PANEL
-        // ==================================================
+        JPanel infoPanel = new JPanel(new BorderLayout());
 
-        JPanel infoPanel =
-                new JPanel(
-                        new BorderLayout()
-                );
-
-        infoPanel.setBackground(
-                INFO_BG
+        infoPanel.setBackground(INFO_BG
         );
 
         infoPanel.setBorder(
@@ -509,8 +357,7 @@ public class ViewCategoryPanel extends JPanel {
                 )
         );
 
-        JLabel infoLabel =
-                new JLabel(
+        JLabel infoLabel = new JLabel(
                         "<html><center>"
                                 + "<b>Category Filter</b>"
                                 + "<br>"
@@ -519,8 +366,7 @@ public class ViewCategoryPanel extends JPanel {
                         SwingConstants.CENTER
                 );
 
-        infoLabel.setFont(
-                new Font(
+        infoLabel.setFont(new Font(
                         "SansSerif",
                         Font.PLAIN,
                         13
@@ -531,42 +377,23 @@ public class ViewCategoryPanel extends JPanel {
                 INFO_TEXT
         );
 
-        infoPanel.add(
-                infoLabel,
-                BorderLayout.CENTER
-        );
+        infoPanel.add(infoLabel, BorderLayout.CENTER);
 
-        add(
-                infoPanel,
-                BorderLayout.SOUTH
-        );
+        add(infoPanel, BorderLayout.SOUTH);
 
-        // ==================================================
-        // CATEGORY CHANGE
-        // ==================================================
+
 
         comboCategory.addActionListener(
                 e -> refreshCatalog()
         );
 
-        // ==================================================
-        // REFRESH BUTTON
-        // ==================================================
 
         btnRefresh.addActionListener(
                 e -> refreshCatalog()
         );
 
-        // ==================================================
-        // INITIAL LOAD
-        // ==================================================
-
         refreshCatalog();
     }
-
-    // ==================================================
-    // REFRESH CATALOG
-    // ==================================================
 
     public void refreshCatalog() {
 
@@ -574,23 +401,16 @@ public class ViewCategoryPanel extends JPanel {
 
         try {
 
-            List<LibraryItems> catalog =
-                    libraryService.getCatalog();
+            List<LibraryItems> catalog = libraryService.getCatalog();
 
-            String selectedCategory =
-                    (String) comboCategory.getSelectedItem();
+            String selectedCategory = (String) comboCategory.getSelectedItem();
 
-            if (catalog == null ||
-                    catalog.isEmpty()) {
+            if (catalog == null || catalog.isEmpty()) {
 
                 return;
             }
 
             for (LibraryItems item : catalog) {
-
-                // ==========================================
-                // CHECK CATEGORY
-                // ==========================================
 
                 if ("Books".equals(selectedCategory)
                         && !(item instanceof Book)) {
@@ -604,33 +424,25 @@ public class ViewCategoryPanel extends JPanel {
                     continue;
                 }
 
-                // ==========================================
-                // ITEM TYPE
-                // ==========================================
-
                 String type;
 
                 String authorOrPublisher;
 
                 if (item instanceof Book) {
 
-                    Book book =
-                            (Book) item;
+                    Book book = (Book) item;
 
                     type = "Book";
 
-                    authorOrPublisher =
-                            book.getAuthor();
+                    authorOrPublisher = book.getAuthor();
 
                 } else if (item instanceof Magazine) {
 
-                    Magazine magazine =
-                            (Magazine) item;
+                    Magazine magazine = (Magazine) item;
 
                     type = "Magazine";
 
-                    authorOrPublisher =
-                            magazine.getPublisher();
+                    authorOrPublisher = magazine.getPublisher();
 
                 } else {
 
@@ -638,10 +450,6 @@ public class ViewCategoryPanel extends JPanel {
 
                     authorOrPublisher = "N/A";
                 }
-
-                // ==========================================
-                // STATUS
-                // ==========================================
 
                 String status;
 
@@ -654,18 +462,7 @@ public class ViewCategoryPanel extends JPanel {
                     status = "Available";
                 }
 
-                // ==========================================
-                // MEMBER ID
-                // ==========================================
-
-                String memberId =
-                        item.isIssued()
-                                ? item.getMemberId()
-                                : "N/A";
-
-                // ==========================================
-                // ADD ROW
-                // ==========================================
+                String memberId = item.isIssued() ? item.getMemberId() : "N/A";
 
                 tableModel.addRow(
                         new Object[]{
@@ -692,10 +489,6 @@ public class ViewCategoryPanel extends JPanel {
         }
     }
 
-    // ==================================================
-    // COMBO BOX STYLE
-    // ==================================================
-
     private void styleComboBox(
             JComboBox<String> comboBox) {
 
@@ -711,82 +504,81 @@ public class ViewCategoryPanel extends JPanel {
                 TEXT_COLOR
         );
 
-        comboBox.setBackground(
-                new Color(248, 250, 252)
+        comboBox.setBackground(new Color(248, 250, 252)
         );
 
-        comboBox.setPreferredSize(
-                new Dimension(
+        comboBox.setPreferredSize(new Dimension(
                         150,
                         35
                 )
         );
 
-        comboBox.setBorder(
-                BorderFactory.createLineBorder(
+        comboBox.setBorder(BorderFactory.createLineBorder(
                         new Color(203, 213, 225)
                 )
         );
     }
 
-    // ==================================================
-    // REFRESH BUTTON STYLE
-    // ==================================================
-
     private void styleRefreshButton(
             JButton button) {
 
-        button.setFont(
-                new Font(
+        button.setFont(new Font(
                         "SansSerif",
                         Font.BOLD,
                         14
                 )
         );
 
-        button.setForeground(
-                Color.WHITE
-        );
+        button.setForeground(Color.WHITE);
 
-        button.setBackground(
-                PRIMARY
-        );
-
+        button.setBackground(PRIMARY);
+        button.setOpaque(true);
+        button.setContentAreaFilled(true);
+        button.setBorderPainted(false);
         button.setFocusPainted(false);
+        button.setOpaque(false);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        button.setPreferredSize(new Dimension(140, 36));
+        button.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
+            @Override
+            public void paint(Graphics g, JComponent c) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        button.setBorder(
-                new EmptyBorder(
-                        9,
-                        22,
-                        9,
-                        22
-                )
-        );
+                AbstractButton b = (AbstractButton) c;
+                ButtonModel model = b.getModel();
 
-        button.setCursor(
-                new Cursor(
-                        Cursor.HAND_CURSOR
-                )
-        );
+                if (model.isPressed()) {
+                    g2.setColor(PRIMARY_HOVER.darker());
+                } else if (model.isRollover()) {
+                    g2.setColor(PRIMARY_HOVER);
+                } else {
+                    g2.setColor(PRIMARY);
+                }
+
+                g2.fillRoundRect(0, 0, c.getWidth(), c.getHeight(), 8, 8);
+                g2.dispose();
+
+                super.paint(g, c);
+            }
+        });
+
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         button.addMouseListener(
                 new java.awt.event.MouseAdapter() {
 
                     @Override
-                    public void mouseEntered(
-                            java.awt.event.MouseEvent e) {
+                    public void mouseEntered(java.awt.event.MouseEvent e) {
 
-                        button.setBackground(
-                                PRIMARY_HOVER
+                        button.setBackground(PRIMARY_HOVER
                         );
                     }
 
                     @Override
-                    public void mouseExited(
-                            java.awt.event.MouseEvent e) {
+                    public void mouseExited(java.awt.event.MouseEvent e) {
 
-                        button.setBackground(
-                                PRIMARY
+                        button.setBackground(PRIMARY
                         );
                     }
                 }

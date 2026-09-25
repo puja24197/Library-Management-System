@@ -531,8 +531,7 @@ public class AddItemPanel extends JPanel {
     // PRIMARY BUTTON
     // ==================================================
 
-    private void stylePrimaryButton(
-            JButton button) {
+    private void stylePrimaryButton(JButton button) {
 
         button.setFont(
                 new Font(
@@ -542,14 +541,12 @@ public class AddItemPanel extends JPanel {
                 )
         );
 
-        button.setForeground(
-                Color.WHITE
-        );
+        button.setForeground(Color.WHITE);
 
-        button.setBackground(
-                PRIMARY
-        );
-
+        button.setBackground(PRIMARY);
+        button.setOpaque(true);
+        button.setContentAreaFilled(true);
+        button.setBorderPainted(false);
         button.setFocusPainted(false);
 
         button.setBorder(
@@ -613,7 +610,9 @@ public class AddItemPanel extends JPanel {
         button.setBackground(
                 SECONDARY
         );
-
+        button.setOpaque(true);
+        button.setContentAreaFilled(true);
+        button.setBorderPainted(false);
         button.setFocusPainted(false);
 
         button.setBorder(

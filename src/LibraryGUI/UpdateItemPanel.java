@@ -30,45 +30,29 @@ public class UpdateItemPanel extends JPanel {
     // COLORS
     // ==========================================
 
-    private final Color BACKGROUND =
-            new Color(245, 247, 252);
+    private final Color BACKGROUND = new Color(245, 247, 252);
 
-    private final Color CARD_COLOR =
-            Color.WHITE;
+    private final Color CARD_COLOR = Color.WHITE;
 
-    private final Color PRIMARY =
-            new Color(79, 70, 229);
+    private final Color PRIMARY = new Color(79, 70, 229);
 
-    private final Color PRIMARY_HOVER =
-            new Color(67, 56, 202);
+    private final Color PRIMARY_HOVER = new Color(67, 56, 202);
 
-    private final Color SECONDARY =
-            new Color(226, 232, 240);
+    private final Color SECONDARY = new Color(226, 232, 240);
 
-    private final Color TEXT_COLOR =
-            new Color(31, 41, 55);
+    private final Color TEXT_COLOR = new Color(31, 41, 55);
 
-    private final Color SUBTITLE_COLOR =
-            new Color(100, 116, 139);
+    private final Color SUBTITLE_COLOR = new Color(100, 116, 139);
 
-    private final Color INFO_BG =
-            new Color(238, 242, 255);
+    private final Color INFO_BG = new Color(238, 242, 255);
 
-    private final Color INFO_TEXT =
-            new Color(55, 48, 163);
+    private final Color INFO_TEXT = new Color(55, 48, 163);
 
     public UpdateItemPanel(LibraryService service) {
 
         this.libraryService = service;
-
-        // ==========================================
-        // MAIN PANEL
-        // ==========================================
-
         setLayout(new BorderLayout());
-
         setBackground(BACKGROUND);
-
         setBorder(
                 new EmptyBorder(
                         20,
@@ -78,99 +62,56 @@ public class UpdateItemPanel extends JPanel {
                 )
         );
 
-        // ==========================================
-        // HEADER
-        // ==========================================
+        JPanel headerPanel = new JPanel();
 
-        JPanel headerPanel =
-                new JPanel();
-
-        headerPanel.setLayout(
-                new BoxLayout(
-                        headerPanel,
-                        BoxLayout.Y_AXIS
-                )
-        );
+        headerPanel.setLayout(new BoxLayout(headerPanel, BoxLayout.Y_AXIS));
 
         headerPanel.setOpaque(false);
 
-        JLabel titleLabel =
-                new JLabel(
-                        "Update Library Item",
-                        SwingConstants.CENTER
-                );
+        JLabel titleLabel = new JLabel("Update Library Item", SwingConstants.CENTER);
 
-        titleLabel.setAlignmentX(
-                Component.CENTER_ALIGNMENT
-        );
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        titleLabel.setFont(
-                new Font(
+        titleLabel.setFont(new Font(
                         "SansSerif",
                         Font.BOLD,
                         26
                 )
         );
 
-        titleLabel.setForeground(
-                PRIMARY
-        );
+        titleLabel.setForeground(PRIMARY);
 
-        JLabel subtitleLabel =
-                new JLabel(
-                        "Edit the information of an existing library item",
-                        SwingConstants.CENTER
-                );
+        JLabel subtitleLabel = new JLabel("Edit the information of an existing library item", SwingConstants.CENTER);
 
-        subtitleLabel.setAlignmentX(
-                Component.CENTER_ALIGNMENT
-        );
+        subtitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        subtitleLabel.setFont(
-                new Font(
+        subtitleLabel.setFont(new Font(
                         "SansSerif",
                         Font.PLAIN,
                         14
                 )
         );
 
-        subtitleLabel.setForeground(
-                SUBTITLE_COLOR
-        );
+        subtitleLabel.setForeground(SUBTITLE_COLOR);
 
         headerPanel.add(titleLabel);
 
-        headerPanel.add(
-                Box.createVerticalStrut(5)
-        );
+        headerPanel.add(Box.createVerticalStrut(5));
 
         headerPanel.add(subtitleLabel);
 
-        headerPanel.add(
-                Box.createVerticalStrut(15)
-        );
+        headerPanel.add(Box.createVerticalStrut(15));
 
         add(
                 headerPanel,
                 BorderLayout.NORTH
         );
 
-        // ==========================================
-        // FORM CARD
-        // ==========================================
+        JPanel cardPanel = new JPanel(new GridBagLayout());
 
-        JPanel cardPanel =
-                new JPanel(
-                        new GridBagLayout()
-                );
+        cardPanel.setBackground(CARD_COLOR);
 
-        cardPanel.setBackground(
-                CARD_COLOR
-        );
-
-        cardPanel.setBorder(
-                BorderFactory.createCompoundBorder(
-                        BorderFactory.createLineBorder(
+        cardPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(
                                 new Color(226, 232, 240)
                         ),
                         new EmptyBorder(
@@ -182,50 +123,30 @@ public class UpdateItemPanel extends JPanel {
                 )
         );
 
-        GridBagConstraints gbc =
-                new GridBagConstraints();
+        GridBagConstraints gbc = new GridBagConstraints();
 
-        gbc.insets =
-                new Insets(
+        gbc.insets = new Insets(
                         5,
                         10,
                         5,
                         10
                 );
 
-        gbc.fill =
-                GridBagConstraints.HORIZONTAL;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
         gbc.weightx = 1.0;
 
-        // ==========================================
-        // ITEM TYPE
-        // ==========================================
-
-        comboItemType =
-                new JComboBox<>(
-                        new String[]{
-                                "Book",
-                                "Magazine"
-                        }
-                );
+        comboItemType = new JComboBox<>(new String[]{"Book", "Magazine"});
 
         styleComboBox(comboItemType);
 
-        addField(
-                cardPanel,
-                gbc,
+        addField(cardPanel, gbc,
                 0,
                 "Item Type",
                 comboItemType
         );
 
-        // ==========================================
-        // CURRENT TITLE
-        // ==========================================
-
-        txtOldTitle =
-                new JTextField(25);
+        txtOldTitle = new JTextField(25);
 
         styleTextField(txtOldTitle);
 
@@ -237,27 +158,15 @@ public class UpdateItemPanel extends JPanel {
                 txtOldTitle
         );
 
-        // ==========================================
-        // NEW TITLE
-        // ==========================================
-
-        txtNewTitle =
-                new JTextField(25);
+        txtNewTitle = new JTextField(25);
 
         styleTextField(txtNewTitle);
 
-        addField(
-                cardPanel,
-                gbc,
+        addField(cardPanel, gbc,
                 2,
                 "New Title",
                 txtNewTitle
         );
-
-        // ==========================================
-        // TOTAL COPIES
-        // ==========================================
-
         txtTotalCopies =
                 new JTextField(25);
 
@@ -270,58 +179,33 @@ public class UpdateItemPanel extends JPanel {
                 "New Total Copies",
                 txtTotalCopies
         );
+        lblAuthor = createLabel("New Author");
 
-        // ==========================================
-        // AUTHOR
-        // ==========================================
-
-        lblAuthor =
-                createLabel("New Author");
-
-        txtAuthor =
-                new JTextField(25);
+        txtAuthor = new JTextField(25);
 
         styleTextField(txtAuthor);
 
-        addField(
-                cardPanel,
-                gbc,
+        addField(cardPanel, gbc,
                 4,
                 lblAuthor,
                 txtAuthor
         );
 
-        // ==========================================
-        // PUBLISHER
-        // ==========================================
+        lblPublisher = createLabel("New Publisher");
 
-        lblPublisher =
-                createLabel("New Publisher");
-
-        txtPublisher =
-                new JTextField(25);
+        txtPublisher = new JTextField(25);
 
         styleTextField(txtPublisher);
 
-        addField(
-                cardPanel,
-                gbc,
+        addField(cardPanel, gbc,
                 5,
                 lblPublisher,
                 txtPublisher
         );
-
-        // Initially Book selected
         lblPublisher.setVisible(false);
         txtPublisher.setVisible(false);
 
-        // ==========================================
-        // BUTTONS
-        // ==========================================
-
-        JPanel buttonPanel =
-                new JPanel(
-                        new FlowLayout(
+        JPanel buttonPanel = new JPanel(new FlowLayout(
                                 FlowLayout.CENTER,
                                 15,
                                 8
@@ -351,28 +235,16 @@ public class UpdateItemPanel extends JPanel {
         gbc.gridy = 6;
         gbc.gridwidth = 2;
 
-        cardPanel.add(
-                buttonPanel,
-                gbc
-        );
+        cardPanel.add(buttonPanel, gbc);
 
         add(
                 cardPanel,
                 BorderLayout.CENTER
         );
 
-        // ==========================================
-        // INFORMATION CARD
-        // ==========================================
+        JPanel infoPanel = new JPanel(new BorderLayout());
 
-        JPanel infoPanel =
-                new JPanel(
-                        new BorderLayout()
-                );
-
-        infoPanel.setBackground(
-                INFO_BG
-        );
+        infoPanel.setBackground(INFO_BG);
 
         infoPanel.setBorder(
                 BorderFactory.createCompoundBorder(
@@ -388,8 +260,7 @@ public class UpdateItemPanel extends JPanel {
                 )
         );
 
-        JLabel infoLabel =
-                new JLabel(
+        JLabel infoLabel = new JLabel(
                         "<html><center>"
                                 + "<b>Update Information</b>"
                                 + "<br>"
@@ -400,17 +271,14 @@ public class UpdateItemPanel extends JPanel {
                         SwingConstants.CENTER
                 );
 
-        infoLabel.setFont(
-                new Font(
+        infoLabel.setFont(new Font(
                         "SansSerif",
                         Font.PLAIN,
                         13
                 )
         );
 
-        infoLabel.setForeground(
-                INFO_TEXT
-        );
+        infoLabel.setForeground(INFO_TEXT);
 
         infoPanel.add(
                 infoLabel,
@@ -422,34 +290,16 @@ public class UpdateItemPanel extends JPanel {
                 BorderLayout.SOUTH
         );
 
-        // ==========================================
-        // ITEM TYPE CHANGE
-        // ==========================================
-
         comboItemType.addActionListener(
                 e -> updateItemTypeFields()
         );
-
-        // ==========================================
-        // UPDATE BUTTON
-        // ==========================================
-
         btnUpdate.addActionListener(
                 e -> updateItem()
         );
-
-        // ==========================================
-        // CLEAR BUTTON
-        // ==========================================
-
         btnClear.addActionListener(
                 e -> clearFields()
         );
     }
-
-    // ==================================================
-    // CREATE LABEL
-    // ==================================================
 
     private JLabel createLabel(
             String text) {
@@ -471,10 +321,6 @@ public class UpdateItemPanel extends JPanel {
 
         return label;
     }
-
-    // ==================================================
-    // ADD FIELD
-    // ==================================================
 
     private void addField(
             JPanel panel,
@@ -516,10 +362,6 @@ public class UpdateItemPanel extends JPanel {
         );
     }
 
-    // ==================================================
-    // TEXT FIELD STYLE
-    // ==================================================
-
     private void styleTextField(
             JTextField field) {
 
@@ -531,13 +373,9 @@ public class UpdateItemPanel extends JPanel {
                 )
         );
 
-        field.setForeground(
-                TEXT_COLOR
-        );
+        field.setForeground(TEXT_COLOR);
 
-        field.setBackground(
-                new Color(248, 250, 252)
-        );
+        field.setBackground(new Color(248, 250, 252));
 
         field.setBorder(
                 BorderFactory.createCompoundBorder(
@@ -554,63 +392,41 @@ public class UpdateItemPanel extends JPanel {
         );
     }
 
-    // ==================================================
-    // COMBO BOX STYLE
-    // ==================================================
+    private void styleComboBox(JComboBox<String> comboBox) {
 
-    private void styleComboBox(
-            JComboBox<String> comboBox) {
-
-        comboBox.setFont(
-                new Font(
+        comboBox.setFont(new Font(
                         "SansSerif",
                         Font.PLAIN,
                         14
                 )
         );
 
-        comboBox.setForeground(
-                TEXT_COLOR
-        );
+        comboBox.setForeground(TEXT_COLOR);
 
-        comboBox.setBackground(
-                new Color(248, 250, 252)
-        );
+        comboBox.setBackground(new Color(248, 250, 252));
 
-        comboBox.setBorder(
-                BorderFactory.createLineBorder(
-                        new Color(203, 213, 225)
-                )
-        );
+        comboBox.setBorder(BorderFactory.createLineBorder(new Color(203, 213, 225)));
     }
 
-    // ==================================================
-    // PRIMARY BUTTON STYLE
-    // ==================================================
+    private void stylePrimaryButton(JButton button) {
 
-    private void stylePrimaryButton(
-            JButton button) {
-
-        button.setFont(
-                new Font(
+        button.setFont(new Font(
                         "SansSerif",
                         Font.BOLD,
                         14
                 )
         );
 
-        button.setForeground(
-                Color.WHITE
-        );
-
-        button.setBackground(
-                PRIMARY
-        );
-
+        button.setForeground(Color.WHITE);
+        button.setBackground(PRIMARY);
         button.setFocusPainted(false);
+        button.setBorderPainted(false);
+        button.setContentAreaFilled(false);
+        button.setOpaque(false);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        button.setPreferredSize(new Dimension(160, 38));
 
-        button.setBorder(
-                new EmptyBorder(
+        button.setBorder(new EmptyBorder(
                         10,
                         25,
                         10,
@@ -618,63 +434,60 @@ public class UpdateItemPanel extends JPanel {
                 )
         );
 
-        button.setCursor(
-                new Cursor(
-                        Cursor.HAND_CURSOR
-                )
-        );
+        button.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
+            @Override
+            public void paint(Graphics g, JComponent c) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        button.addMouseListener(
-                new java.awt.event.MouseAdapter() {
+                AbstractButton b = (AbstractButton) c;
+                ButtonModel model = b.getModel();
 
-                    @Override
-                    public void mouseEntered(
-                            java.awt.event.MouseEvent e) {
-
-                        button.setBackground(
-                                PRIMARY_HOVER
-                        );
-                    }
-
-                    @Override
-                    public void mouseExited(
-                            java.awt.event.MouseEvent e) {
-
-                        button.setBackground(
-                                PRIMARY
-                        );
-                    }
+                if (model.isPressed()) {
+                    g2.setColor(PRIMARY_HOVER.darker());
+                } else if (model.isRollover()) {
+                    g2.setColor(PRIMARY_HOVER);
+                } else {
+                    g2.setColor(PRIMARY);
                 }
-        );
+
+                g2.fillRoundRect(0, 0, c.getWidth(), c.getHeight(), 8, 8);
+                g2.dispose();
+
+                FontMetrics fm = g.getFontMetrics(b.getFont());
+                Rectangle viewR = new Rectangle(c.getWidth(), c.getHeight());
+                Rectangle iconR = new Rectangle();
+                Rectangle textR = new Rectangle();
+
+                String text = SwingUtilities.layoutCompoundLabel(
+                        c, fm, b.getText(), b.getIcon(),
+                        b.getVerticalAlignment(), b.getHorizontalAlignment(),
+                        b.getVerticalTextPosition(), b.getHorizontalTextPosition(),
+                        viewR, iconR, textR, b.getIconTextGap());
+
+                g.setFont(b.getFont());
+                g.setColor(b.getForeground());
+                g.drawString(text, textR.x, textR.y + fm.getAscent());
+            }
+        });
     }
 
-    // ==================================================
-    // CLEAR BUTTON STYLE
-    // ==================================================
+    private void styleClearButton(JButton button) {
 
-    private void styleClearButton(
-            JButton button) {
-
-        button.setFont(
-                new Font(
+        button.setFont(new Font(
                         "SansSerif",
                         Font.BOLD,
                         14
                 )
         );
 
-        button.setForeground(
-                TEXT_COLOR
-        );
+        button.setForeground(TEXT_COLOR);
 
-        button.setBackground(
-                SECONDARY
-        );
+        button.setBackground(SECONDARY);
 
         button.setFocusPainted(false);
 
-        button.setBorder(
-                new EmptyBorder(
+        button.setBorder(new EmptyBorder(
                         10,
                         25,
                         10,
@@ -682,24 +495,16 @@ public class UpdateItemPanel extends JPanel {
                 )
         );
 
-        button.setCursor(
-                new Cursor(
-                        Cursor.HAND_CURSOR
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR
                 )
         );
     }
-
-    // ==================================================
-    // SHOW/HIDE BOOK OR MAGAZINE FIELDS
-    // ==================================================
 
     private void updateItemTypeFields() {
 
-        String selectedType =
-                (String) comboItemType.getSelectedItem();
+        String selectedType = (String) comboItemType.getSelectedItem();
 
-        boolean isBook =
-                "Book".equals(selectedType);
+        boolean isBook = "Book".equals(selectedType);
 
         lblAuthor.setVisible(isBook);
         txtAuthor.setVisible(isBook);
@@ -711,33 +516,17 @@ public class UpdateItemPanel extends JPanel {
         repaint();
     }
 
-    // ==================================================
-    // UPDATE ITEM
-    // ==================================================
-
     private void updateItem() {
 
         try {
 
-            // ==========================================
-            // GET INPUT
-            // ==========================================
+            String type = (String) comboItemType.getSelectedItem();
 
-            String type =
-                    (String) comboItemType.getSelectedItem();
+            String oldTitle = txtOldTitle.getText().trim();
 
-            String oldTitle =
-                    txtOldTitle.getText().trim();
+            String newTitle = txtNewTitle.getText().trim();
 
-            String newTitle =
-                    txtNewTitle.getText().trim();
-
-            String copiesText =
-                    txtTotalCopies.getText().trim();
-
-            // ==========================================
-            // VALIDATE CURRENT TITLE
-            // ==========================================
+            String copiesText = txtTotalCopies.getText().trim();
 
             if (oldTitle.isEmpty()) {
 
@@ -753,10 +542,6 @@ public class UpdateItemPanel extends JPanel {
                 return;
             }
 
-            // ==========================================
-            // VALIDATE NEW TITLE
-            // ==========================================
-
             if (newTitle.isEmpty()) {
 
                 JOptionPane.showMessageDialog(
@@ -770,11 +555,6 @@ public class UpdateItemPanel extends JPanel {
 
                 return;
             }
-
-            // ==========================================
-            // VALIDATE COPIES
-            // ==========================================
-
             if (copiesText.isEmpty()) {
 
                 JOptionPane.showMessageDialog(
@@ -793,10 +573,7 @@ public class UpdateItemPanel extends JPanel {
 
             try {
 
-                newTotalCopies =
-                        Integer.parseInt(
-                                copiesText
-                        );
+                newTotalCopies = Integer.parseInt(copiesText);
 
             } catch (NumberFormatException ex) {
 
@@ -826,10 +603,6 @@ public class UpdateItemPanel extends JPanel {
                 return;
             }
 
-            // ==========================================
-            // CHECK WHETHER ITEM EXISTS
-            // ==========================================
-
             if (libraryService.searchByTitle(oldTitle)
                     == null) {
 
@@ -839,14 +612,9 @@ public class UpdateItemPanel extends JPanel {
                 );
             }
 
-            // ==========================================
-            // UPDATE BOOK
-            // ==========================================
-
             if ("Book".equals(type)) {
 
-                String author =
-                        txtAuthor.getText().trim();
+                String author = txtAuthor.getText().trim();
 
                 if (author.isEmpty()) {
 
@@ -886,10 +654,6 @@ public class UpdateItemPanel extends JPanel {
 
             } else {
 
-                // ==========================================
-                // UPDATE MAGAZINE
-                // ==========================================
-
                 String publisher =
                         txtPublisher.getText().trim();
 
@@ -914,8 +678,7 @@ public class UpdateItemPanel extends JPanel {
                         publisher
                 );
 
-                JOptionPane.showMessageDialog(
-                        this,
+                JOptionPane.showMessageDialog(this,
                         "Magazine updated successfully!\n\n"
                                 + "Old Title: "
                                 + oldTitle
@@ -929,11 +692,6 @@ public class UpdateItemPanel extends JPanel {
                         JOptionPane.INFORMATION_MESSAGE
                 );
             }
-
-            // ==========================================
-            // CLEAR AFTER SUCCESS
-            // ==========================================
-
             clearFields();
 
         } catch (ItemNotFoundException ex) {
@@ -965,10 +723,6 @@ public class UpdateItemPanel extends JPanel {
             );
         }
     }
-
-    // ==================================================
-    // CLEAR
-    // ==================================================
 
     private void clearFields() {
 

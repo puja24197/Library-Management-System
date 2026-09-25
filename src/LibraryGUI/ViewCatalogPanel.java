@@ -19,9 +19,6 @@ public class ViewCatalogPanel extends JPanel {
     private JTable table;
     private DefaultTableModel tableModel;
 
-    // ==========================================
-    // COLORS
-    // ==========================================
 
     private final Color BACKGROUND =
             new Color(245, 247, 252);
@@ -32,26 +29,19 @@ public class ViewCatalogPanel extends JPanel {
     private final Color PRIMARY =
             new Color(79, 70, 229);
 
-    private final Color PRIMARY_HOVER =
-            new Color(67, 56, 202);
+    private final Color PRIMARY_HOVER = new Color(67, 56, 202);
 
-    private final Color TEXT_COLOR =
-            new Color(31, 41, 55);
+    private final Color TEXT_COLOR = new Color(31, 41, 55);
+    private final Color SUBTITLE_COLOR = new Color(100, 116, 139);
+    private final Color HEADER_BG = new Color(238, 242, 255);
+    private final Color HEADER_TEXT = new Color(31, 41, 55);
 
-    private final Color SUBTITLE_COLOR =
-            new Color(100, 116, 139);
 
-    private final Color HEADER_COLOR =
-            new Color(67, 56, 202);
 
-    public ViewCatalogPanel(
-            LibraryService libraryService) {
+    public ViewCatalogPanel(LibraryService libraryService) {
 
         this.libraryService = libraryService;
 
-        // ==========================================
-        // MAIN PANEL
-        // ==========================================
 
         setLayout(new BorderLayout());
 
@@ -62,90 +52,49 @@ public class ViewCatalogPanel extends JPanel {
                         20,
                         25,
                         20,
-                        25
-                )
+                        25)
         );
 
-        // ==========================================
-        // HEADER
-        // ==========================================
+        JPanel headerPanel = new JPanel();
 
-        JPanel headerPanel =
-                new JPanel();
-
-        headerPanel.setLayout(
-                new BoxLayout(
-                        headerPanel,
-                        BoxLayout.Y_AXIS
-                )
-        );
+        headerPanel.setLayout(new BoxLayout(headerPanel, BoxLayout.Y_AXIS));
 
         headerPanel.setOpaque(false);
 
-        JLabel titleLabel =
-                new JLabel(
-                        "Library Catalog",
-                        SwingConstants.CENTER
-                );
+        JLabel titleLabel = new JLabel("Library Catalog", SwingConstants.CENTER);
 
-        titleLabel.setAlignmentX(
-                Component.CENTER_ALIGNMENT
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        titleLabel.setFont(new Font("SansSerif", Font.BOLD, 26));
+
+        titleLabel.setForeground(PRIMARY);
+
+        JLabel subtitleLabel = new JLabel(
+                "View all books and magazines available in the library",
+                SwingConstants.CENTER
         );
 
-        titleLabel.setFont(
-                new Font(
-                        "SansSerif",
-                        Font.BOLD,
-                        26
-                )
-        );
+        subtitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        titleLabel.setForeground(
-                PRIMARY
-        );
+        subtitleLabel.setFont(new Font("SansSerif", Font.PLAIN, 14));
 
-        JLabel subtitleLabel =
-                new JLabel(
-                        "View all books and magazines available in the library",
-                        SwingConstants.CENTER
-                );
-
-        subtitleLabel.setAlignmentX(
-                Component.CENTER_ALIGNMENT
-        );
-
-        subtitleLabel.setFont(
-                new Font(
-                        "SansSerif",
-                        Font.PLAIN,
-                        14
-                )
-        );
-
-        subtitleLabel.setForeground(
-                SUBTITLE_COLOR
-        );
+        subtitleLabel.setForeground(SUBTITLE_COLOR);
 
         headerPanel.add(titleLabel);
 
         headerPanel.add(
-                Box.createVerticalStrut(5)
-        );
+                Box.createVerticalStrut(5));
 
         headerPanel.add(subtitleLabel);
 
         headerPanel.add(
-                Box.createVerticalStrut(15)
-        );
+                Box.createVerticalStrut(15));
 
         add(
                 headerPanel,
                 BorderLayout.NORTH
         );
 
-        // ==========================================
-        // TABLE MODEL
-        // ==========================================
 
         String[] columnNames = {
                 "Type",
@@ -154,86 +103,44 @@ public class ViewCatalogPanel extends JPanel {
                 "Available Copies"
         };
 
-        tableModel =
-                new DefaultTableModel(
-                        columnNames,
-                        0
-                ) {
+        tableModel = new DefaultTableModel(columnNames, 0) {
 
-                    @Override
-                    public boolean isCellEditable(
-                            int row,
-                            int column) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
 
-                        return false;
-                    }
-                };
+                return false;
+            }
+        };
 
-        // ==========================================
-        // TABLE
-        // ==========================================
 
-        table =
-                new JTable(tableModel);
+        table = new JTable(tableModel);
 
         table.setRowHeight(32);
 
-        table.setFont(
-                new Font(
-                        "SansSerif",
-                        Font.PLAIN,
-                        13
-                )
-        );
+        table.setFont(new Font("SansSerif", Font.PLAIN, 13));
 
-        table.setForeground(
-                TEXT_COLOR
-        );
+        table.setForeground(TEXT_COLOR);
 
-        table.setBackground(
-                Color.WHITE
-        );
+        table.setBackground(Color.WHITE);
 
-        table.setGridColor(
-                new Color(226, 232, 240)
-        );
+        table.setGridColor(new Color(226, 232, 240));
 
-        table.setSelectionBackground(
-                new Color(224, 231, 255)
-        );
+        table.setSelectionBackground(new Color(224, 231, 255));
 
-        table.setSelectionForeground(
-                TEXT_COLOR
-        );
+        table.setSelectionForeground(TEXT_COLOR);
 
         table.setAutoCreateRowSorter(true);
 
-        table.setSelectionMode(
-                ListSelectionModel.SINGLE_SELECTION
-        );
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+        headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        headerRenderer.setBackground(HEADER_BG);
+        headerRenderer.setForeground(HEADER_TEXT);
+        headerRenderer.setFont(new Font("SansSerif", Font.BOLD, 13));
 
-        // ==========================================
-        // TABLE HEADER
-        // ==========================================
-
-        table.getTableHeader()
-                .setFont(
-                        new Font(
-                                "SansSerif",
-                                Font.BOLD,
-                                13
-                        )
-                );
-
-        table.getTableHeader()
-                .setForeground(
-                        Color.WHITE
-                );
-
-        table.getTableHeader()
-                .setBackground(
-                        HEADER_COLOR
-                );
+        for (int i = 0; i < table.getColumnCount(); i++) {
+            table.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+        }
 
         table.getTableHeader()
                 .setPreferredSize(
@@ -243,32 +150,22 @@ public class ViewCatalogPanel extends JPanel {
                         )
                 );
 
-        // ==========================================
-        // CENTER ALIGNMENT
-        // ==========================================
 
-        DefaultTableCellRenderer centerRenderer =
-                new DefaultTableCellRenderer();
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 
-        centerRenderer.setHorizontalAlignment(
-                SwingConstants.CENTER
-        );
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        table.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
 
         table.getColumnModel()
                 .getColumn(0)
                 .setCellRenderer(
-                        centerRenderer
-                );
+                        centerRenderer);
 
         table.getColumnModel()
                 .getColumn(3)
                 .setCellRenderer(
-                        centerRenderer
-                );
-
-        // ==========================================
-        // COLUMN WIDTH
-        // ==========================================
+                        centerRenderer);
 
         table.getColumnModel()
                 .getColumn(0)
@@ -286,39 +183,17 @@ public class ViewCatalogPanel extends JPanel {
                 .getColumn(3)
                 .setPreferredWidth(130);
 
-        // ==========================================
-        // SCROLL PANE
-        // ==========================================
+        JScrollPane scrollPane = new JScrollPane(table);
 
-        JScrollPane scrollPane =
-                new JScrollPane(table);
+        scrollPane.setBorder(BorderFactory.createLineBorder(new Color(226, 232, 240)));
 
-        scrollPane.setBorder(
-                BorderFactory.createLineBorder(
-                        new Color(226, 232, 240)
-                )
-        );
+        scrollPane.getViewport().setBackground(Color.WHITE);
 
-        scrollPane.getViewport()
-                .setBackground(
-                        Color.WHITE
-                );
+        JPanel tableCard = new JPanel(new BorderLayout());
 
-        // ==========================================
-        // TABLE CARD
-        // ==========================================
+        tableCard.setBackground(CARD_COLOR);
 
-        JPanel tableCard =
-                new JPanel(
-                        new BorderLayout()
-                );
-
-        tableCard.setBackground(
-                CARD_COLOR
-        );
-
-        tableCard.setBorder(
-                BorderFactory.createCompoundBorder(
+        tableCard.setBorder(BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(
                                 new Color(226, 232, 240)
                         ),
@@ -331,66 +206,22 @@ public class ViewCatalogPanel extends JPanel {
                 )
         );
 
-        tableCard.add(
-                scrollPane,
-                BorderLayout.CENTER
-        );
+        tableCard.add(scrollPane, BorderLayout.CENTER);
 
-        add(
-                tableCard,
-                BorderLayout.CENTER
-        );
+        add(tableCard, BorderLayout.CENTER);
 
-        // ==========================================
-        // BOTTOM CONTROL PANEL
-        // ==========================================
-
-        JPanel bottomPanel =
-                new JPanel(
-                        new FlowLayout(
-                                FlowLayout.CENTER,
-                                10,
-                                12
-                        )
-                );
+        JPanel bottomPanel = new JPanel(new FlowLayout(
+                FlowLayout.CENTER,
+                10,
+                12
+        ));
 
         bottomPanel.setOpaque(false);
 
-        JButton refreshBtn =
-                new JButton(
-                        "Refresh Catalog"
-                );
-
+        JButton refreshBtn = new JButton("Refresh Catalog");
         styleRefreshButton(refreshBtn);
-
-        bottomPanel.add(
-                refreshBtn
-        );
-
-        add(
-                bottomPanel,
-                BorderLayout.SOUTH
-        );
-
-        // ==========================================
-        // REFRESH ACTION
-        // ==========================================
-
-        refreshBtn.addActionListener(
-                e -> refreshCatalog()
-        );
-
-        // ==========================================
-        // INITIAL LOAD
-        // ==========================================
-
-        refreshCatalog();
+        bottomPanel.add(refreshBtn);
     }
-
-    // ==================================================
-    // REFRESH CATALOG
-    // ==================================================
-
     public void refreshCatalog() {
 
         tableModel.setRowCount(0);
@@ -410,22 +241,13 @@ public class ViewCatalogPanel extends JPanel {
                 String type = "";
                 String detail = "";
 
-                // ==========================================
-                // BOOK
-                // ==========================================
-
                 if (item instanceof Book) {
 
                     type = "Book";
 
-                    detail =
-                            ((Book) item)
-                                    .getAuthor();
+                    detail = ((Book) item).getAuthor();
                 }
 
-                // ==========================================
-                // MAGAZINE
-                // ==========================================
 
                 else if (item instanceof Magazine) {
 
@@ -436,9 +258,6 @@ public class ViewCatalogPanel extends JPanel {
                                     .getPublisher();
                 }
 
-                // ==========================================
-                // ADD ROW
-                // ==========================================
 
                 Object[] rowData = {
 
@@ -451,9 +270,7 @@ public class ViewCatalogPanel extends JPanel {
                         item.getAvailableCopies()
                 };
 
-                tableModel.addRow(
-                        rowData
-                );
+                tableModel.addRow(rowData);
             }
 
         } catch (Exception ex) {
@@ -468,67 +285,52 @@ public class ViewCatalogPanel extends JPanel {
         }
     }
 
-    // ==================================================
-    // REFRESH BUTTON STYLE
-    // ==================================================
+    private void styleRefreshButton(JButton button) {
 
-    private void styleRefreshButton(
-            JButton button) {
-
-        button.setFont(
-                new Font(
-                        "SansSerif",
-                        Font.BOLD,
-                        14
-                )
-        );
-
-        button.setForeground(
-                Color.WHITE
-        );
-
-        button.setBackground(
-                PRIMARY
-        );
-
+        button.setFont(new Font("SansSerif", Font.BOLD, 14));
+        button.setForeground(Color.WHITE);
+        button.setBackground(PRIMARY);
         button.setFocusPainted(false);
+        button.setBorderPainted(false);
+        button.setContentAreaFilled(false);
+        button.setOpaque(false);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        button.setPreferredSize(new Dimension(170, 38));
 
-        button.setBorder(
-                new EmptyBorder(
-                        10,
-                        25,
-                        10,
-                        25
-                )
-        );
+            button.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
+                @Override
+                public void paint(Graphics g, JComponent c) {
+                    Graphics2D g2 = (Graphics2D) g.create();
+                    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        button.setCursor(
-                new Cursor(
-                        Cursor.HAND_CURSOR
-                )
-        );
+                    AbstractButton b = (AbstractButton) c;
+                    ButtonModel model = b.getModel();
 
-        button.addMouseListener(
-                new java.awt.event.MouseAdapter() {
-
-                    @Override
-                    public void mouseEntered(
-                            java.awt.event.MouseEvent e) {
-
-                        button.setBackground(
-                                PRIMARY_HOVER
-                        );
+                    if (model.isPressed()) {
+                        g2.setColor(PRIMARY_HOVER.darker());
+                    } else if (model.isRollover()) {
+                        g2.setColor(PRIMARY_HOVER);
+                    } else {
+                        g2.setColor(PRIMARY);
                     }
 
-                    @Override
-                    public void mouseExited(
-                            java.awt.event.MouseEvent e) {
+                    g2.fillRoundRect(0, 0, c.getWidth(), c.getHeight(), 8, 8);
+                    g2.dispose();
+                    FontMetrics fm = g.getFontMetrics(b.getFont());
+                    Rectangle viewR = new Rectangle(c.getWidth(), c.getHeight());
+                    Rectangle iconR = new Rectangle();
+                    Rectangle textR = new Rectangle();
 
-                        button.setBackground(
-                                PRIMARY
-                        );
+                    String text = SwingUtilities.layoutCompoundLabel(
+                            c, fm, b.getText(), b.getIcon(),
+                            b.getVerticalAlignment(), b.getHorizontalAlignment(),
+                            b.getVerticalTextPosition(), b.getHorizontalTextPosition(),
+                            viewR, iconR, textR, b.getIconTextGap());
+
+                    g.setFont(b.getFont());
+                    g.setColor(b.getForeground());
+                    g.drawString(text, textR.x, textR.y + fm.getAscent());
+                }
+            } );
                     }
                 }
-        );
-    }
-}

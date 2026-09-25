@@ -17,12 +17,10 @@ public class IssueItemPanel extends JPanel {
     private JTextField txtMemberId;
     private JTextField txtEmail;
     private JTextField txtIssueDay;
+    private JTextField txtQuantity;
 
     private JComboBox<String> comboType;
 
-    // ==========================================
-    // COLORS
-    // ==========================================
 
     private final Color BACKGROUND =
             new Color(245, 247, 252);
@@ -55,10 +53,6 @@ public class IssueItemPanel extends JPanel {
 
         this.libraryService = service;
 
-        // ==========================================
-        // MAIN PANEL
-        // ==========================================
-
         setLayout(new BorderLayout());
 
         setBackground(BACKGROUND);
@@ -72,43 +66,25 @@ public class IssueItemPanel extends JPanel {
                 )
         );
 
-        // ==========================================
-        // HEADER
-        // ==========================================
+        JPanel headerPanel = new JPanel();
 
-        JPanel headerPanel =
-                new JPanel();
-
-        headerPanel.setLayout(
-                new BoxLayout(
-                        headerPanel,
-                        BoxLayout.Y_AXIS
-                )
+        headerPanel.setLayout(new BoxLayout(headerPanel, BoxLayout.Y_AXIS)
         );
 
         headerPanel.setOpaque(false);
 
         JLabel titleLabel =
-                new JLabel(
-                        "Issue Library Item",
-                        SwingConstants.CENTER
-                );
+                new JLabel("Issue Library Item", SwingConstants.CENTER);
 
         titleLabel.setAlignmentX(
                 Component.CENTER_ALIGNMENT
         );
 
         titleLabel.setFont(
-                new Font(
-                        "SansSerif",
-                        Font.BOLD,
-                        26
-                )
+                new Font("SansSerif", Font.BOLD, 26)
         );
 
-        titleLabel.setForeground(
-                PRIMARY
-        );
+        titleLabel.setForeground(PRIMARY);
 
         JLabel subtitleLabel =
                 new JLabel(
@@ -116,16 +92,10 @@ public class IssueItemPanel extends JPanel {
                         SwingConstants.CENTER
                 );
 
-        subtitleLabel.setAlignmentX(
-                Component.CENTER_ALIGNMENT
-        );
+        subtitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         subtitleLabel.setFont(
-                new Font(
-                        "SansSerif",
-                        Font.PLAIN,
-                        14
-                )
+                new Font("SansSerif", Font.PLAIN, 14)
         );
 
         subtitleLabel.setForeground(
@@ -149,10 +119,6 @@ public class IssueItemPanel extends JPanel {
                 BorderLayout.NORTH
         );
 
-        // ==========================================
-        // FORM CARD
-        // ==========================================
-
         JPanel cardPanel =
                 new JPanel(
                         new GridBagLayout()
@@ -167,11 +133,7 @@ public class IssueItemPanel extends JPanel {
                         BorderFactory.createLineBorder(
                                 new Color(226, 232, 240)
                         ),
-                        new EmptyBorder(
-                                20,
-                                30,
-                                20,
-                                30
+                        new EmptyBorder(20, 30, 20, 30
                         )
                 )
         );
@@ -192,10 +154,6 @@ public class IssueItemPanel extends JPanel {
 
         gbc.weightx = 1.0;
 
-        // ==========================================
-        // ITEM TITLE
-        // ==========================================
-
         txtTitle =
                 new JTextField(25);
 
@@ -208,10 +166,6 @@ public class IssueItemPanel extends JPanel {
                 "Item Title",
                 txtTitle
         );
-
-        // ==========================================
-        // MEMBER ID
-        // ==========================================
 
         txtMemberId =
                 new JTextField(25);
@@ -226,34 +180,14 @@ public class IssueItemPanel extends JPanel {
                 txtMemberId
         );
 
-        // ==========================================
-        // EMAIL
-        // ==========================================
-
         txtEmail =
                 new JTextField(25);
-
         styleTextField(txtEmail);
 
-        addField(
-                cardPanel,
-                gbc,
-                2,
-                "Member Email",
-                txtEmail
-        );
+        addField(cardPanel, gbc, 2, "Member Email", txtEmail);
 
-        // ==========================================
-        // MEMBER TYPE
-        // ==========================================
-
-        comboType =
-                new JComboBox<>(
-                        new String[]{
-                                "Student",
-                                "Faculty"
-                        }
-                );
+        comboType = new JComboBox<>(new String[]
+                {"Student", "Faculty"});
 
         styleComboBox(comboType);
 
@@ -264,10 +198,6 @@ public class IssueItemPanel extends JPanel {
                 "Member Type",
                 comboType
         );
-
-        // ==========================================
-        // ISSUE DAY
-        // ==========================================
 
         txtIssueDay =
                 new JTextField(25);
@@ -281,10 +211,10 @@ public class IssueItemPanel extends JPanel {
                 "Issue Day",
                 txtIssueDay
         );
-
-        // ==========================================
-        // BUTTONS
-        // ==========================================
+        txtQuantity = new JTextField(25);
+        txtQuantity.setText("1");
+        styleTextField(txtQuantity);
+        addField(cardPanel, gbc, 5, "Quantity", txtQuantity);
 
         JPanel buttonPanel =
                 new JPanel(
@@ -315,7 +245,7 @@ public class IssueItemPanel extends JPanel {
         buttonPanel.add(btnClear);
 
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy = 6;
         gbc.gridwidth = 2;
 
         cardPanel.add(
@@ -328,9 +258,6 @@ public class IssueItemPanel extends JPanel {
                 BorderLayout.CENTER
         );
 
-        // ==========================================
-        // INFORMATION CARD
-        // ==========================================
 
         JPanel infoPanel =
                 new JPanel(
@@ -389,9 +316,6 @@ public class IssueItemPanel extends JPanel {
                 BorderLayout.SOUTH
         );
 
-        // ==========================================
-        // BUTTON ACTIONS
-        // ==========================================
 
         btnIssue.addActionListener(
                 e -> issueItem()
@@ -401,10 +325,6 @@ public class IssueItemPanel extends JPanel {
                 e -> clearFields()
         );
     }
-
-    // ==================================================
-    // ADD FIELD
-    // ==================================================
 
     private void addField(
             JPanel panel,
@@ -445,10 +365,6 @@ public class IssueItemPanel extends JPanel {
         );
     }
 
-    // ==================================================
-    // TEXT FIELD STYLE
-    // ==================================================
-
     private void styleTextField(
             JTextField field) {
 
@@ -483,9 +399,6 @@ public class IssueItemPanel extends JPanel {
         );
     }
 
-    // ==================================================
-    // COMBO BOX STYLE
-    // ==================================================
 
     private void styleComboBox(
             JComboBox<String> comboBox) {
@@ -577,10 +490,6 @@ public class IssueItemPanel extends JPanel {
         );
     }
 
-    // ==================================================
-    // CLEAR BUTTON STYLE
-    // ==================================================
-
     private void styleClearButton(
             JButton button) {
 
@@ -618,10 +527,6 @@ public class IssueItemPanel extends JPanel {
         );
     }
 
-    // ==================================================
-    // ISSUE ITEM
-    // ==================================================
-
     private void issueItem() {
 
         try {
@@ -641,10 +546,6 @@ public class IssueItemPanel extends JPanel {
             String issueDayText =
                     txtIssueDay.getText().trim();
 
-            // ==========================================
-            // BASIC VALIDATION
-            // ==========================================
-
             if (title.isEmpty()
                     || memberId.isEmpty()
                     || email.isEmpty()
@@ -659,10 +560,6 @@ public class IssueItemPanel extends JPanel {
 
                 return;
             }
-
-            // ==========================================
-            // ISSUE DAY VALIDATION
-            // ==========================================
 
             int issueDay;
 
@@ -697,19 +594,11 @@ public class IssueItemPanel extends JPanel {
                 return;
             }
 
-            // ==========================================
-            // GET BORROWED COUNT
-            // ==========================================
-
             int currentBorrowed =
                     libraryService
                             .getBorrowedCountForMember(
                                     memberId
                             );
-
-            // ==========================================
-            // PROCESS ISSUE
-            // ==========================================
 
             libraryService.processIssue(
                     title,
@@ -719,10 +608,6 @@ public class IssueItemPanel extends JPanel {
                     issueDay,
                     currentBorrowed
             );
-
-            // ==========================================
-            // SUCCESS
-            // ==========================================
 
             JOptionPane.showMessageDialog(
                     this,
@@ -774,10 +659,6 @@ public class IssueItemPanel extends JPanel {
             );
         }
     }
-
-    // ==================================================
-    // CLEAR FIELDS
-    // ==================================================
 
     private void clearFields() {
 
