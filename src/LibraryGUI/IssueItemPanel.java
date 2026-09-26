@@ -119,14 +119,9 @@ public class IssueItemPanel extends JPanel {
                 BorderLayout.NORTH
         );
 
-        JPanel cardPanel =
-                new JPanel(
-                        new GridBagLayout()
-                );
+        JPanel cardPanel = new JPanel(new GridBagLayout());
 
-        cardPanel.setBackground(
-                CARD_COLOR
-        );
+        cardPanel.setBackground(CARD_COLOR);
 
         cardPanel.setBorder(
                 BorderFactory.createCompoundBorder(
@@ -138,24 +133,20 @@ public class IssueItemPanel extends JPanel {
                 )
         );
 
-        GridBagConstraints gbc =
-                new GridBagConstraints();
+        GridBagConstraints gbc = new GridBagConstraints();
 
-        gbc.insets =
-                new Insets(
+        gbc.insets = new Insets(
                         7,
                         10,
                         7,
                         10
                 );
 
-        gbc.fill =
-                GridBagConstraints.HORIZONTAL;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
         gbc.weightx = 1.0;
 
-        txtTitle =
-                new JTextField(25);
+        txtTitle = new JTextField(25);
 
         styleTextField(txtTitle);
 
@@ -167,8 +158,7 @@ public class IssueItemPanel extends JPanel {
                 txtTitle
         );
 
-        txtMemberId =
-                new JTextField(25);
+        txtMemberId = new JTextField(25);
 
         styleTextField(txtMemberId);
 
@@ -180,14 +170,12 @@ public class IssueItemPanel extends JPanel {
                 txtMemberId
         );
 
-        txtEmail =
-                new JTextField(25);
+        txtEmail = new JTextField(25);
         styleTextField(txtEmail);
 
         addField(cardPanel, gbc, 2, "Member Email", txtEmail);
 
-        comboType = new JComboBox<>(new String[]
-                {"Student", "Faculty"});
+        comboType = new JComboBox<>(new String[]{"Student", "Faculty"});
 
         styleComboBox(comboType);
 
@@ -199,13 +187,11 @@ public class IssueItemPanel extends JPanel {
                 comboType
         );
 
-        txtIssueDay =
-                new JTextField(25);
+        txtIssueDay = new JTextField(25);
 
         styleTextField(txtIssueDay);
 
-        addField(
-                cardPanel,
+        addField(cardPanel,
                 gbc,
                 4,
                 "Issue Day",
@@ -216,9 +202,7 @@ public class IssueItemPanel extends JPanel {
         styleTextField(txtQuantity);
         addField(cardPanel, gbc, 5, "Quantity", txtQuantity);
 
-        JPanel buttonPanel =
-                new JPanel(
-                        new FlowLayout(
+        JPanel buttonPanel = new JPanel(new FlowLayout(
                                 FlowLayout.CENTER,
                                 15,
                                 10
@@ -227,15 +211,9 @@ public class IssueItemPanel extends JPanel {
 
         buttonPanel.setOpaque(false);
 
-        JButton btnIssue =
-                new JButton(
-                        "Issue Item"
-                );
+        JButton btnIssue = new JButton("Issue Item");
 
-        JButton btnClear =
-                new JButton(
-                        "Clear"
-                );
+        JButton btnClear = new JButton("Clear");
 
         stylePrimaryButton(btnIssue);
 
@@ -252,24 +230,20 @@ public class IssueItemPanel extends JPanel {
                 buttonPanel,
                 gbc
         );
+        JPanel centerWrapper = new JPanel(new GridBagLayout());
+        centerWrapper.setOpaque(false);
+        centerWrapper.add(cardPanel);
 
         add(
-                cardPanel,
+                centerWrapper,
                 BorderLayout.CENTER
         );
 
+        JPanel infoPanel = new JPanel(new BorderLayout());
 
-        JPanel infoPanel =
-                new JPanel(
-                        new BorderLayout()
-                );
+        infoPanel.setBackground(INFO_BG);
 
-        infoPanel.setBackground(
-                INFO_BG
-        );
-
-        infoPanel.setBorder(
-                BorderFactory.createCompoundBorder(
+        infoPanel.setBorder(BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(
                                 new Color(199, 210, 254)
                         ),
@@ -282,8 +256,7 @@ public class IssueItemPanel extends JPanel {
                 )
         );
 
-        JLabel infoLabel =
-                new JLabel(
+        JLabel infoLabel = new JLabel(
                         "<html><center>"
                                 + "<b>Borrowing Rules</b>"
                                 + "<br>"
@@ -294,22 +267,16 @@ public class IssueItemPanel extends JPanel {
                         SwingConstants.CENTER
                 );
 
-        infoLabel.setFont(
-                new Font(
+        infoLabel.setFont(new Font(
                         "SansSerif",
                         Font.PLAIN,
                         13
                 )
         );
 
-        infoLabel.setForeground(
-                INFO_TEXT
-        );
+        infoLabel.setForeground(INFO_TEXT);
 
-        infoPanel.add(
-                infoLabel,
-                BorderLayout.CENTER
-        );
+        infoPanel.add(infoLabel, BorderLayout.CENTER);
 
         add(
                 infoPanel,
@@ -425,29 +392,14 @@ public class IssueItemPanel extends JPanel {
                 )
         );
     }
+    private void stylePrimaryButton(JButton button) {
+        button.setUI(new javax.swing.plaf.basic.BasicButtonUI());
+        button.setOpaque(true);
+        button.setFont(new Font("SansSerif", Font.BOLD, 14));
 
-    // ==================================================
-    // PRIMARY BUTTON STYLE
-    // ==================================================
+        button.setForeground(Color.WHITE);
 
-    private void stylePrimaryButton(
-            JButton button) {
-
-        button.setFont(
-                new Font(
-                        "SansSerif",
-                        Font.BOLD,
-                        14
-                )
-        );
-
-        button.setForeground(
-                Color.WHITE
-        );
-
-        button.setBackground(
-                PRIMARY
-        );
+        button.setBackground(PRIMARY);
 
         button.setFocusPainted(false);
 
@@ -490,61 +442,36 @@ public class IssueItemPanel extends JPanel {
         );
     }
 
-    private void styleClearButton(
-            JButton button) {
+    private void styleClearButton(JButton button) {
+        button.setUI(new javax.swing.plaf.basic.BasicButtonUI());
+        button.setOpaque(true);
 
-        button.setFont(
-                new Font(
-                        "SansSerif",
-                        Font.BOLD,
-                        14
-                )
-        );
+        button.setFont(new Font("SansSerif", Font.BOLD, 14));
 
-        button.setForeground(
-                TEXT_COLOR
-        );
+        button.setForeground(TEXT_COLOR);
 
-        button.setBackground(
-                SECONDARY
-        );
+        button.setBackground(SECONDARY);
 
         button.setFocusPainted(false);
 
-        button.setBorder(
-                new EmptyBorder(
-                        10,
-                        25,
-                        10,
-                        25
-                )
-        );
+        button.setBorder(new EmptyBorder(10, 25, 10, 25));
 
-        button.setCursor(
-                new Cursor(
-                        Cursor.HAND_CURSOR
-                )
-        );
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
     private void issueItem() {
 
         try {
 
-            String title =
-                    txtTitle.getText().trim();
+            String title = txtTitle.getText().trim();
 
-            String memberId =
-                    txtMemberId.getText().trim();
+            String memberId = txtMemberId.getText().trim();
 
-            String email =
-                    txtEmail.getText().trim();
+            String email = txtEmail.getText().trim();
 
-            String memberType =
-                    (String) comboType.getSelectedItem();
+            String memberType = (String) comboType.getSelectedItem();
 
-            String issueDayText =
-                    txtIssueDay.getText().trim();
+            String issueDayText = txtIssueDay.getText().trim();
 
             if (title.isEmpty()
                     || memberId.isEmpty()

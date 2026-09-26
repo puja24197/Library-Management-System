@@ -16,10 +16,6 @@ public class DeleteItemPanel extends JPanel {
     private JButton btnDelete;
     private JButton btnClear;
 
-    // ==========================================
-    // COLORS
-    // ==========================================
-
     private final Color BACKGROUND =
             new Color(245, 247, 252);
 
@@ -48,16 +44,11 @@ public class DeleteItemPanel extends JPanel {
 
         this.libraryService = service;
 
-        // ==========================================
-        // MAIN PANEL
-        // ==========================================
-
         setLayout(new BorderLayout());
 
         setBackground(BACKGROUND);
 
-        setBorder(
-                new EmptyBorder(
+        setBorder(new EmptyBorder(
                         20,
                         30,
                         20,
@@ -65,15 +56,9 @@ public class DeleteItemPanel extends JPanel {
                 )
         );
 
-        // ==========================================
-        // HEADER
-        // ==========================================
+        JPanel headerPanel = new JPanel();
 
-        JPanel headerPanel =
-                new JPanel();
-
-        headerPanel.setLayout(
-                new BoxLayout(
+        headerPanel.setLayout(new BoxLayout(
                         headerPanel,
                         BoxLayout.Y_AXIS
                 )
@@ -81,82 +66,60 @@ public class DeleteItemPanel extends JPanel {
 
         headerPanel.setOpaque(false);
 
-        JLabel titleLabel =
-                new JLabel(
+        JLabel titleLabel = new JLabel(
                         "Delete Library Item",
                         SwingConstants.CENTER
                 );
 
-        titleLabel.setAlignmentX(
-                Component.CENTER_ALIGNMENT
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT
         );
 
-        titleLabel.setFont(
-                new Font(
+        titleLabel.setFont(new Font(
                         "SansSerif",
                         Font.BOLD,
                         26
                 )
         );
 
-        titleLabel.setForeground(
-                DANGER
+        titleLabel.setForeground(DANGER
         );
 
-        JLabel subtitleLabel =
-                new JLabel(
+        JLabel subtitleLabel = new JLabel(
                         "Remove an item from the library",
                         SwingConstants.CENTER
                 );
 
-        subtitleLabel.setAlignmentX(
-                Component.CENTER_ALIGNMENT
+        subtitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT
         );
 
-        subtitleLabel.setFont(
-                new Font(
+        subtitleLabel.setFont(new Font(
                         "SansSerif",
                         Font.PLAIN,
                         14
                 )
         );
 
-        subtitleLabel.setForeground(
-                SUBTITLE_COLOR
+        subtitleLabel.setForeground(SUBTITLE_COLOR
         );
 
         headerPanel.add(titleLabel);
 
-        headerPanel.add(
-                Box.createVerticalStrut(5)
-        );
+        headerPanel.add(Box.createVerticalStrut(5));
 
         headerPanel.add(subtitleLabel);
 
-        headerPanel.add(
-                Box.createVerticalStrut(15)
-        );
+        headerPanel.add(Box.createVerticalStrut(15));
 
         add(
                 headerPanel,
                 BorderLayout.NORTH
         );
 
-        // ==========================================
-        // FORM CARD
-        // ==========================================
+        JPanel cardPanel = new JPanel(new GridBagLayout());
 
-        JPanel cardPanel =
-                new JPanel(
-                        new GridBagLayout()
-                );
+        cardPanel.setBackground(CARD_COLOR);
 
-        cardPanel.setBackground(
-                CARD_COLOR
-        );
-
-        cardPanel.setBorder(
-                BorderFactory.createCompoundBorder(
+        cardPanel.setBorder(BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(
                                 new Color(226, 232, 240)
                         ),
@@ -169,31 +132,22 @@ public class DeleteItemPanel extends JPanel {
                 )
         );
 
-        GridBagConstraints gbc =
-                new GridBagConstraints();
+        GridBagConstraints gbc = new GridBagConstraints();
 
-        gbc.insets =
-                new Insets(
+        gbc.insets = new Insets(
                         10,
                         10,
                         10,
                         10
                 );
 
-        gbc.fill =
-                GridBagConstraints.HORIZONTAL;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
         gbc.weightx = 1.0;
 
-        // ==========================================
-        // TITLE LABEL
-        // ==========================================
+        JLabel lblTitle = createLabel("Item Title");
 
-        JLabel lblTitle =
-                createLabel("Item Title");
-
-        txtTitle =
-                new JTextField(25);
+        txtTitle = new JTextField(25);
 
         styleTextField(txtTitle);
 
@@ -201,25 +155,13 @@ public class DeleteItemPanel extends JPanel {
         gbc.gridy = 0;
         gbc.gridwidth = 1;
 
-        cardPanel.add(
-                lblTitle,
-                gbc
-        );
+        cardPanel.add(lblTitle, gbc);
 
         gbc.gridx = 1;
 
-        cardPanel.add(
-                txtTitle,
-                gbc
-        );
+        cardPanel.add(txtTitle, gbc);
 
-        // ==========================================
-        // BUTTONS
-        // ==========================================
-
-        JPanel buttonPanel =
-                new JPanel(
-                        new FlowLayout(
+        JPanel buttonPanel = new JPanel(new FlowLayout(
                                 FlowLayout.CENTER,
                                 15,
                                 10
@@ -228,15 +170,9 @@ public class DeleteItemPanel extends JPanel {
 
         buttonPanel.setOpaque(false);
 
-        btnDelete =
-                new JButton(
-                        "Delete Item"
-                );
+        btnDelete = new JButton("Delete Item");
 
-        btnClear =
-                new JButton(
-                        "Clear"
-                );
+        btnClear = new JButton("Clear");
 
         styleDeleteButton(btnDelete);
 
@@ -249,31 +185,18 @@ public class DeleteItemPanel extends JPanel {
         gbc.gridy = 1;
         gbc.gridwidth = 2;
 
-        cardPanel.add(
-                buttonPanel,
-                gbc
-        );
+        cardPanel.add(buttonPanel, gbc);
+        JPanel centerWrapper = new JPanel(new GridBagLayout());
+        centerWrapper.setOpaque(false);
+        centerWrapper.add(cardPanel);
 
-        add(
-                cardPanel,
-                BorderLayout.CENTER
-        );
+        add(centerWrapper, BorderLayout.CENTER);
 
-        // ==========================================
-        // WARNING CARD
-        // ==========================================
+        JPanel warningPanel = new JPanel(new BorderLayout());
 
-        JPanel warningPanel =
-                new JPanel(
-                        new BorderLayout()
-                );
+        warningPanel.setBackground(WARNING_BG);
 
-        warningPanel.setBackground(
-                WARNING_BG
-        );
-
-        warningPanel.setBorder(
-                BorderFactory.createCompoundBorder(
+        warningPanel.setBorder(BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(
                                 new Color(254, 202, 202)
                         ),
@@ -286,8 +209,7 @@ public class DeleteItemPanel extends JPanel {
                 )
         );
 
-        JLabel warningLabel =
-                new JLabel(
+        JLabel warningLabel = new JLabel(
                         "<html><center>"
                                 + "<b>Warning:</b> Deleting an item "
                                 + "cannot be undone."
@@ -306,40 +228,23 @@ public class DeleteItemPanel extends JPanel {
                 )
         );
 
-        warningLabel.setForeground(
-                new Color(153, 27, 27)
-        );
+        warningLabel.setForeground(new Color(153, 27, 27));
 
-        warningPanel.add(
-                warningLabel,
-                BorderLayout.CENTER
-        );
+        warningPanel.add(warningLabel, BorderLayout.CENTER);
 
         add(
                 warningPanel,
                 BorderLayout.SOUTH
         );
 
-        // ==========================================
-        // DELETE BUTTON
-        // ==========================================
-
         btnDelete.addActionListener(
                 e -> deleteItem()
         );
-
-        // ==========================================
-        // CLEAR BUTTON
-        // ==========================================
 
         btnClear.addActionListener(
                 e -> clearFields()
         );
     }
-
-    // ==================================================
-    // CREATE LABEL
-    // ==================================================
 
     private JLabel createLabel(
             String text) {
@@ -347,66 +252,35 @@ public class DeleteItemPanel extends JPanel {
         JLabel label =
                 new JLabel(text);
 
-        label.setFont(
-                new Font(
-                        "SansSerif",
-                        Font.BOLD,
-                        14
-                )
-        );
+        label.setFont(new Font("SansSerif", Font.BOLD, 14));
 
-        label.setForeground(
-                TEXT_COLOR
-        );
+        label.setForeground(TEXT_COLOR);
 
         return label;
     }
 
-    // ==================================================
-    // TEXT FIELD STYLE
-    // ==================================================
+    private void styleTextField(JTextField field) {
 
-    private void styleTextField(
-            JTextField field) {
+        field.setFont(new Font("SansSerif", Font.PLAIN, 14));
 
-        field.setFont(
-                new Font(
-                        "SansSerif",
-                        Font.PLAIN,
-                        14
-                )
-        );
+        field.setForeground(TEXT_COLOR);
 
-        field.setForeground(
-                TEXT_COLOR
-        );
-
-        field.setBackground(
-                new Color(248, 250, 252)
-        );
+        field.setBackground(new Color(248, 250, 252));
 
         field.setBorder(
                 BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(
                                 new Color(203, 213, 225)
                         ),
-                        new EmptyBorder(
-                                8,
-                                10,
-                                8,
-                                10
+                        new EmptyBorder(8, 10, 8, 10
                         )
                 )
         );
     }
 
-    // ==================================================
-    // DELETE BUTTON STYLE
-    // ==================================================
-
-    private void styleDeleteButton(
-            JButton button) {
-
+    private void styleDeleteButton(JButton button) {
+        button.setUI(new javax.swing.plaf.basic.BasicButtonUI());
+        button.setOpaque(true);
         button.setFont(
                 new Font(
                         "SansSerif",
@@ -415,30 +289,15 @@ public class DeleteItemPanel extends JPanel {
                 )
         );
 
-        button.setForeground(
-                Color.WHITE
-        );
+        button.setForeground(Color.WHITE);
 
-        button.setBackground(
-                DANGER
-        );
+        button.setBackground(DANGER);
 
         button.setFocusPainted(false);
 
-        button.setBorder(
-                new EmptyBorder(
-                        10,
-                        25,
-                        10,
-                        25
-                )
-        );
+        button.setBorder(new EmptyBorder(10, 25, 10, 25));
 
-        button.setCursor(
-                new Cursor(
-                        Cursor.HAND_CURSOR
-                )
-        );
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         button.addMouseListener(
                 new java.awt.event.MouseAdapter() {
@@ -453,20 +312,14 @@ public class DeleteItemPanel extends JPanel {
                     }
 
                     @Override
-                    public void mouseExited(
-                            java.awt.event.MouseEvent e) {
+                    public void mouseExited(java.awt.event.MouseEvent e) {
 
-                        button.setBackground(
-                                DANGER
-                        );
+                        button.setBackground(DANGER);
                     }
                 }
         );
     }
 
-    // ==================================================
-    // CLEAR BUTTON STYLE
-    // ==================================================
 
     private void styleClearButton(
             JButton button) {
@@ -505,9 +358,6 @@ public class DeleteItemPanel extends JPanel {
         );
     }
 
-    // ==================================================
-    // DELETE ITEM
-    // ==================================================
 
     private void deleteItem() {
 
@@ -516,9 +366,6 @@ public class DeleteItemPanel extends JPanel {
             String title =
                     txtTitle.getText().trim();
 
-            // ==========================================
-            // INPUT VALIDATION
-            // ==========================================
 
             if (title.isEmpty()) {
 
@@ -534,10 +381,6 @@ public class DeleteItemPanel extends JPanel {
                 return;
             }
 
-            // ==========================================
-            // CHECK WHETHER ITEM EXISTS
-            // ==========================================
-
             if (libraryService.searchByTitle(title)
                     == null) {
 
@@ -546,10 +389,6 @@ public class DeleteItemPanel extends JPanel {
                                 + title
                 );
             }
-
-            // ==========================================
-            // CONFIRMATION
-            // ==========================================
 
             int confirmation =
                     JOptionPane.showConfirmDialog(
@@ -562,21 +401,13 @@ public class DeleteItemPanel extends JPanel {
                             JOptionPane.WARNING_MESSAGE
                     );
 
-            if (confirmation
-                    != JOptionPane.YES_OPTION) {
+            if (confirmation != JOptionPane.YES_OPTION) {
 
                 return;
             }
 
-            // ==========================================
-            // DELETE THROUGH SERVICE
-            // ==========================================
 
             libraryService.removeItem(title);
-
-            // ==========================================
-            // SUCCESS MESSAGE
-            // ==========================================
 
             JOptionPane.showMessageDialog(
                     this,
@@ -591,8 +422,7 @@ public class DeleteItemPanel extends JPanel {
 
         } catch (ItemNotFoundException ex) {
 
-            JOptionPane.showMessageDialog(
-                    this,
+            JOptionPane.showMessageDialog(this,
                     ex.getMessage(),
                     "Item Not Found",
                     JOptionPane.ERROR_MESSAGE
@@ -618,10 +448,6 @@ public class DeleteItemPanel extends JPanel {
             );
         }
     }
-
-    // ==================================================
-    // CLEAR
-    // ==================================================
 
     private void clearFields() {
 
