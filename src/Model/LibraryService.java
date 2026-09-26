@@ -11,18 +11,10 @@ public class LibraryService {
 
     private final List<LibraryItems> catalog;
 
-
-    // =========================
-    // CONSTRUCTOR
-    // =========================
     public LibraryService() {
         this.catalog = FileManager.loadData();
     }
 
-
-    // =========================
-    // CREATE
-    // =========================
     public void registerItem(LibraryItems item)
             throws InvalidInputException {
 
@@ -35,12 +27,9 @@ public class LibraryService {
 
         String title = item.getTitle();
 
-        if (title == null ||
-                title.trim().isEmpty()) {
+        if (title == null || title.trim().isEmpty()) {
 
-            throw new InvalidInputException(
-                    "Title is mandatory."
-            );
+            throw new InvalidInputException("Title is mandatory.");
         }
 
 
@@ -51,14 +40,11 @@ public class LibraryService {
             );
         }
 
-
-        // Validate Book
         if (item instanceof Book) {
 
             Book book = (Book) item;
 
-            if (book.getAuthor() == null ||
-                    book.getAuthor().trim().isEmpty()) {
+            if (book.getAuthor() == null || book.getAuthor().trim().isEmpty()) {
 
                 throw new InvalidInputException(
                         "Author is mandatory for a Book."
@@ -66,15 +52,11 @@ public class LibraryService {
             }
         }
 
-
-        // Validate Magazine
         if (item instanceof Magazine) {
 
-            Magazine magazine =
-                    (Magazine) item;
+            Magazine magazine = (Magazine) item;
 
-            if (magazine.getPublisher() == null ||
-                    magazine.getPublisher().trim().isEmpty()) {
+            if (magazine.getPublisher() == null || magazine.getPublisher().trim().isEmpty()) {
 
                 throw new InvalidInputException(
                         "Publisher is mandatory for a Magazine."
@@ -82,12 +64,9 @@ public class LibraryService {
             }
         }
 
-
-        // Prevent duplicate titles
         if (searchByTitle(title) != null) {
 
-            throw new InvalidInputException(
-                    "An item with title '"
+            throw new InvalidInputException("An item with title '"
                             + title
                             + "' already exists."
             );
@@ -96,26 +75,17 @@ public class LibraryService {
 
         catalog.add(item);
 
-        // Persistent storage
         FileManager.saveData(catalog);
 
-        System.out.println(
-                "Success: Record added and saved to file."
-        );
+        System.out.println("Success: Record added and saved to file.");
     }
 
-
-    // =========================
-    // READ
-    // =========================
 
     public void showCatalog() {
 
         if (catalog.isEmpty()) {
 
-            System.out.println(
-                    "Notice: No records available in the library."
-            );
+            System.out.println("Notice: No records available in the library.");
 
             return;
         }
@@ -128,7 +98,6 @@ public class LibraryService {
 
         for (LibraryItems item : catalog) {
 
-            // Polymorphism
             System.out.println(
                     item.getDetails()
             );
@@ -139,8 +108,6 @@ public class LibraryService {
         }
     }
 
-
-    // Search by title
     public LibraryItems searchByTitle(String title) {
 
         if (title == null ||
@@ -164,24 +131,15 @@ public class LibraryService {
         return null;
     }
 
-
-    // Return catalog
     public List<LibraryItems> getCatalog() {
 
         return new ArrayList<>(catalog);
     }
 
 
-    // =========================
-    // MEMBER BORROWED COUNT
-    // =========================
+    public int getBorrowedCountForMember(String memberId) {
 
-    public int getBorrowedCountForMember(
-            String memberId) {
-
-        if (memberId == null ||
-                memberId.trim().isEmpty()) {
-
+        if (memberId == null || memberId.trim().isEmpty()) {
             return 0;
         }
 
@@ -205,10 +163,6 @@ public class LibraryService {
     }
 
 
-    // =========================
-    // ISSUE ITEM
-    // =========================
-
     public void processIssue(
             String title,
             String memberId,
@@ -221,10 +175,7 @@ public class LibraryService {
             InvalidInputException,
             MemberNotFoundException {
 
-
-        // Find item
-        LibraryItems target =
-                searchByTitle(title);
+        LibraryItems target = searchByTitle(title);
 
 
         if (target == null) {
@@ -236,30 +187,13 @@ public class LibraryService {
             );
         }
 
-
-        // Validate Member ID
-        if (memberId == null ||
-                memberId.trim().isEmpty()) {
-
+        if (memberId == null || memberId.trim().isEmpty()) {
             throw new MemberNotFoundException(
                     "Member ID cannot be empty."
             );
         }
 
 
-        if (!memberId.trim()
-                .toUpperCase()
-                .startsWith("M")) {
-
-            throw new MemberNotFoundException(
-                    "Member with ID '"
-                            + memberId
-                            + "' was not found."
-            );
-        }
-
-
-        // Validate member type
         if (memberType == null ||
                 memberType.trim().isEmpty()) {
 
