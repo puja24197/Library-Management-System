@@ -239,13 +239,9 @@ public class LibraryService {
             );
         }
 
-
-        // Calculate actual borrowed count
         int actualBorrowedCount =
                 getBorrowedCountForMember(memberId);
 
-
-        // Use actual count rather than trusting user input
         if (actualBorrowedCount != currentBorrowedCount) {
 
             currentBorrowedCount =
@@ -253,7 +249,6 @@ public class LibraryService {
         }
 
 
-        // Issue item
         boolean success =
                 target.issueItem(
                         memberId,
@@ -284,9 +279,6 @@ public class LibraryService {
     }
 
 
-    // =========================
-    // UPDATE BOOK
-    // =========================
 
     public void updateBook(
             String oldTitle,
@@ -320,7 +312,6 @@ public class LibraryService {
         }
 
 
-        // Validate title
         if (newTitle == null ||
                 newTitle.trim().isEmpty()) {
 
@@ -330,7 +321,6 @@ public class LibraryService {
         }
 
 
-        // Validate copies
         if (newTotalCopies <= 0) {
 
             throw new InvalidInputException(
@@ -339,7 +329,7 @@ public class LibraryService {
         }
 
 
-        // Validate author
+    
         if (newAuthor == null ||
                 newAuthor.trim().isEmpty()) {
 
@@ -349,7 +339,7 @@ public class LibraryService {
         }
 
 
-        // Duplicate title check
+
         LibraryItems existing =
                 searchByTitle(newTitle);
 
@@ -380,8 +370,6 @@ public class LibraryService {
         int issuedCopies =
                 oldTotalCopies - oldAvailableCopies;
 
-
-        // Cannot reduce total copies below issued copies
         if (newTotalCopies < issuedCopies) {
 
             throw new InvalidInputException(
@@ -395,7 +383,7 @@ public class LibraryService {
                 newTotalCopies - issuedCopies;
 
 
-        // Update
+    
         book.setTitle(
                 newTitle.trim()
         );
@@ -413,7 +401,7 @@ public class LibraryService {
         );
 
 
-        // Save
+    
         FileManager.saveData(catalog);
 
 
@@ -422,10 +410,6 @@ public class LibraryService {
         );
     }
 
-
-    // =========================
-    // UPDATE MAGAZINE
-    // =========================
 
     public void updateMagazine(
             String oldTitle,
@@ -459,7 +443,7 @@ public class LibraryService {
         }
 
 
-        // Validate title
+        
         if (newTitle == null ||
                 newTitle.trim().isEmpty()) {
 
@@ -469,7 +453,6 @@ public class LibraryService {
         }
 
 
-        // Validate copies
         if (newTotalCopies <= 0) {
 
             throw new InvalidInputException(
@@ -478,7 +461,6 @@ public class LibraryService {
         }
 
 
-        // Validate publisher
         if (newPublisher == null ||
                 newPublisher.trim().isEmpty()) {
 
@@ -487,8 +469,6 @@ public class LibraryService {
             );
         }
 
-
-        // Duplicate title
         LibraryItems existing =
                 searchByTitle(newTitle);
 
@@ -533,7 +513,7 @@ public class LibraryService {
                 newTotalCopies - issuedCopies;
 
 
-        // Update
+    
         magazine.setTitle(
                 newTitle.trim()
         );
@@ -550,8 +530,6 @@ public class LibraryService {
                 newPublisher.trim()
         );
 
-
-        // Save
         FileManager.saveData(catalog);
 
 
@@ -561,9 +539,6 @@ public class LibraryService {
     }
 
 
-    // =========================
-    // DELETE
-    // =========================
 
     public void removeItem(String title)
             throws ItemNotFoundException,
@@ -584,8 +559,6 @@ public class LibraryService {
         }
 
 
-        // Do not delete an item while
-        // one or more copies are issued.
         if (target.getAvailableCopies()
                 < target.getTotalCopies()) {
 
@@ -600,22 +573,12 @@ public class LibraryService {
 
         catalog.remove(target);
 
-
-        // Save after deletion
         FileManager.saveData(catalog);
 
 
-        System.out.println(
-                "Success: Item deleted and file updated."
-        );
-    }
+        System.out.println("Success: Item deleted and file updated.");
 
-
-    // =========================
-    // RETURN ITEM
-    // =========================
-
-    public double returnItem(
+     public double returnItem(
             String title,
             int returnDate)
 
@@ -654,11 +617,6 @@ public class LibraryService {
                     "Return date must be greater than 0."
             );
         }
-
-
-        // IMPORTANT:
-        // Use LibraryItems.returnFromMember()
-        // so the fine calculation works.
         double fine =
                 target.returnFromMember(returnDate);
 
@@ -670,8 +628,6 @@ public class LibraryService {
             );
         }
 
-
-        // Save updated state
         FileManager.saveData(catalog);
 
 
