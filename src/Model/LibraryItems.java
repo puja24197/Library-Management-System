@@ -2,9 +2,6 @@ package Model;
 
 public abstract class LibraryItems {
 
-    // =========================
-    // ENCAPSULATION
-    // =========================
     private String title;
     private boolean isIssued;
     private String memberId;
@@ -16,9 +13,7 @@ public abstract class LibraryItems {
     private final double finePerDay = 20.0;
 
 
-    // =========================
-    // CONSTRUCTOR
-    // =========================
+    
     public LibraryItems(String title, int totalCopies) {
 
         this.title = title;
@@ -34,17 +29,11 @@ public abstract class LibraryItems {
     }
 
 
-    // =========================
-    // ABSTRACTION
-    // =========================
+    
     public abstract String getDetails();
 
 
-    // =========================
-    // BUSINESS RULES
-    // =========================
 
-    // Maximum number of books a member can borrow
     public int getMaxAllowedBooks(String memberType) {
 
         if (memberType == null ||
@@ -65,7 +54,7 @@ public abstract class LibraryItems {
     }
 
 
-    // Maximum borrowing period
+
     public int getMaxBorrowDays(String memberType) {
 
         if (memberType == null ||
@@ -86,9 +75,7 @@ public abstract class LibraryItems {
     }
 
 
-    // =========================
-    // ISSUE ITEM
-    // =========================
+
     public boolean issueItem(
             String memberId,
             String memberType,
@@ -96,7 +83,7 @@ public abstract class LibraryItems {
             int currentDate,
             int currentBorrowedCount) {
 
-        // Validate Member ID
+    
         if (memberId == null ||
                 memberId.trim().isEmpty()) {
 
@@ -108,7 +95,6 @@ public abstract class LibraryItems {
         }
 
 
-        // Validate Member Type
         if (memberType == null ||
                 memberType.trim().isEmpty()) {
 
@@ -119,8 +105,6 @@ public abstract class LibraryItems {
             return false;
         }
 
-
-        // Validate Student / Faculty
         if (!memberType.equalsIgnoreCase("Student")
                 && !memberType.equalsIgnoreCase("Faculty")) {
 
@@ -132,7 +116,6 @@ public abstract class LibraryItems {
         }
 
 
-        // Validate Email
         if (!isValidEmail(memberEmail)) {
 
             System.out.println(
@@ -143,7 +126,6 @@ public abstract class LibraryItems {
         }
 
 
-        // Validate Date
         if (currentDate <= 0) {
 
             System.out.println(
@@ -185,11 +167,6 @@ public abstract class LibraryItems {
             return false;
         }
 
-
-        // =========================
-        // UPDATE OBJECT STATE
-        // =========================
-
         availableCopies--;
 
         this.isIssued = true;
@@ -221,13 +198,8 @@ public abstract class LibraryItems {
         return true;
     }
 
-
-    // =========================
-    // RETURN ITEM
-    // =========================
     public double returnFromMember(int returnDate) {
 
-        // No issued copy
         if (availableCopies >= totalCopies) {
 
             System.out.println(
@@ -238,7 +210,6 @@ public abstract class LibraryItems {
         }
 
 
-        // Validate return date
         if (returnDate <= 0) {
 
             System.out.println(
@@ -251,8 +222,6 @@ public abstract class LibraryItems {
 
         double fine = 0.0;
 
-
-        // Calculate fine
         if (returnDate > dueDate) {
 
             int lateDays =
@@ -261,13 +230,8 @@ public abstract class LibraryItems {
             fine = lateDays * finePerDay;
         }
 
-
-        // Return one copy
         availableCopies++;
 
-
-        // If all copies are now available,
-        // no copy is currently issued.
         if (availableCopies >= totalCopies) {
 
             availableCopies = totalCopies;
@@ -306,10 +270,6 @@ public abstract class LibraryItems {
         return fine;
     }
 
-
-    // =========================
-    // EMAIL VALIDATION
-    // =========================
     private boolean isValidEmail(String email) {
 
         if (email == null ||
@@ -323,10 +283,6 @@ public abstract class LibraryItems {
         );
     }
 
-
-    // =========================
-    // WIKIPEDIA
-    // =========================
     public void browseWikipedia(
             String memberEmail,
             String topic) {
@@ -340,8 +296,6 @@ public abstract class LibraryItems {
             return;
         }
 
-
-        // Correct String comparison
         if (topic == null ||
                 topic.trim().isEmpty()) {
 
@@ -363,10 +317,6 @@ public abstract class LibraryItems {
         );
     }
 
-
-    // =========================
-    // GETTERS
-    // =========================
 
     public String getTitle() {
         return title;
@@ -406,11 +356,6 @@ public abstract class LibraryItems {
     public double getFinePerDay() {
         return finePerDay;
     }
-
-
-    // =========================
-    // SETTERS
-    // =========================
 
     public void setTitle(String title) {
 
