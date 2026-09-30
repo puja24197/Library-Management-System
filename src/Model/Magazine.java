@@ -4,10 +4,6 @@ public class Magazine extends LibraryItems {
 
     private String publisher;
 
-
-    // =========================
-    // CONSTRUCTOR
-    // =========================
     public Magazine(
             String title,
             int totalCopies,
@@ -18,19 +14,12 @@ public class Magazine extends LibraryItems {
         this.publisher = publisher;
     }
 
-
-    // =========================
-    // GETTER
-    // =========================
     public String getPublisher() {
 
         return publisher;
     }
 
 
-    // =========================
-    // SETTER
-    // =========================
     public void setPublisher(String publisher) {
 
         if (publisher != null &&
@@ -41,10 +30,6 @@ public class Magazine extends LibraryItems {
         }
     }
 
-
-    // =========================
-    // POLYMORPHISM
-    // =========================
     @Override
     public String getDetails() {
 
