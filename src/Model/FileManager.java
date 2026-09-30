@@ -8,9 +8,6 @@ public class FileManager {
 
     private static final String LIBRARY_FILE = "Mylibrary_data.txt";
 
-    // =========================
-    // SAVE DATA
-    // =========================
     public static void saveData(List<LibraryItems> items) {
 
         try (BufferedWriter writer =
@@ -66,10 +63,6 @@ public class FileManager {
         }
     }
 
-
-    // =========================
-    // LOAD DATA
-    // =========================
     public static List<LibraryItems> loadData() {
 
         List<LibraryItems> items = new ArrayList<>();
@@ -95,10 +88,6 @@ public class FileManager {
                 String[] parts = line.split(",", -1);
 
                 try {
-
-                    // =========================
-                    // LOAD BOOK
-                    // =========================
                     if (parts[0].equalsIgnoreCase("BOOK")) {
 
                         if (parts.length < 9) {
@@ -136,7 +125,6 @@ public class FileManager {
                                         author
                                 );
 
-                        // Restore previous state
                         book.setAvailableCopies(
                                 availableCopies
                         );
@@ -151,11 +139,6 @@ public class FileManager {
 
                         items.add(book);
                     }
-
-
-                    // =========================
-                    // LOAD MAGAZINE
-                    // =========================
                     else if (parts[0].equalsIgnoreCase("MAGAZINE")) {
 
                         if (parts.length < 9) {
@@ -193,10 +176,7 @@ public class FileManager {
                                         publisher
                                 );
 
-                        // Restore previous state
-                        magazine.setAvailableCopies(
-                                availableCopies
-                        );
+                        magazine.setAvailableCopies( availableCopies);
 
                         magazine.setIssued(issued);
 
@@ -234,17 +214,12 @@ public class FileManager {
     }
 
 
-    // =========================
-    // CLEAN DATA BEFORE SAVING
-    // =========================
     private static String clean(String value) {
 
         if (value == null) {
             return "N/A";
         }
 
-        // Comma is our file separator,
-        // so replace it with a space.
         return value
                 .replace(",", " ")
                 .replace("\n", " ")
