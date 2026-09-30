@@ -211,8 +211,6 @@ public class LibraryService {
             );
         }
 
-
-        // Validate email
         if (memberEmail == null ||
                 memberEmail.trim().isEmpty()) {
 
@@ -230,8 +228,6 @@ public class LibraryService {
             );
         }
 
-
-        // Validate date
         if (issueDate <= 0) {
 
             throw new InvalidInputException(
@@ -267,8 +263,6 @@ public class LibraryService {
             );
         }
 
-
-        // Save updated state
         FileManager.saveData(catalog);
 
 
