@@ -4,23 +4,19 @@ public class Book extends LibraryItems {
 
     private String author;
 
-    // Constructor
     public Book(String title, int totalCopies, String author) {
         super(title, totalCopies);
         this.author = author;
     }
 
-    // Getter
     public String getAuthor() {
         return author;
     }
 
-    // Setter
     public void setAuthor(String author) {
         this.author = author;
     }
 
-    // Polymorphism
     @Override
     public String getDetails() {
 
