@@ -135,8 +135,6 @@ public abstract class LibraryItems {
             return false;
         }
 
-
-        // Check available copies
         if (availableCopies <= 0) {
 
             System.out.println(
@@ -153,9 +151,6 @@ public abstract class LibraryItems {
         int allowedDays =
                 getMaxBorrowDays(memberType);
 
-
-        // IMPORTANT:
-        // < instead of <=
         if (currentBorrowedCount >= maxAllowed) {
 
             System.out.println(
