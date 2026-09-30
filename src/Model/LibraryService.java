@@ -463,8 +463,7 @@ public class LibraryService {
             );
         }
 
-        LibraryItems existing =
-                searchByTitle(newTitle);
+        LibraryItems existing = searchByTitle(newTitle);
 
 
         if (existing != null &&
@@ -571,7 +570,7 @@ public class LibraryService {
 
 
         System.out.println("Success: Item deleted and file updated.");
-
+            }
      public double returnItem(
             String title,
             int returnDate)
@@ -580,8 +579,7 @@ public class LibraryService {
             InvalidInputException {
 
 
-        LibraryItems target =
-                searchByTitle(title);
+        LibraryItems target =  searchByTitle(title);
 
 
         if (target == null) {
@@ -625,14 +623,10 @@ public class LibraryService {
         FileManager.saveData(catalog);
 
 
-        System.out.println(
-                "Success: Item returned and file updated."
-        );
+        System.out.println(  "Success: Item returned and file updated.");
 
 
-        if (fine > 0) {
-
-            System.out.println(
+        if (fine > 0) { System.out.println(
                     "Fine: " + fine + " BDT"
             );
         }
