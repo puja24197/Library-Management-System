@@ -9,7 +9,7 @@ A Java Swing-based desktop application designed to streamline library inventory 
 
 ### 🏛️ System Architecture
 The application follows a modular architecture separating the GUI views, service layers, and core data models:
-- **Base Abstract Model (`LibraryItems.java`):** Enforces data contracts and encapsulates common asset properties (`id`, `title`, `availableCopies`, etc.).
+- **Base Abstract Model (`LibraryItems.java`):** Enforces data contracts and encapsulates common asset properties (`id`, `title`, `availableCopies` etc.).
 - **Subclasses (`Book.java`, `Magazine.java`):** Extend the base class to represent specific media types with dedicated parameters like Author or Publisher.
 - **Service Layer (`LibraryService.java`):** Handles core business logic, including validations, title searches, issue limits, and return calculations.
 - **Persistence Layer (`FileManager.java`):** Manages read/write synchronization with local file storage (`Mylibrary_data.txt`).
